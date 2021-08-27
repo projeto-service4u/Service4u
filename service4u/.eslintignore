@@ -1,0 +1,8 @@
+node_modules
+/*.js
+.eslintrc.js
+packages/**/*.js
+dist
+build
+jest.config.js
+**/e2e/*
