@@ -42,6 +42,9 @@
       "@typescript-eslint/parser": [".ts", ".tsx"]
     },
     "import/resolver": {
+      "alias": {
+        "map": [["@", "./src"]]
+      },
       "node": {
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       },

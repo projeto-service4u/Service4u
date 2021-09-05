@@ -1,0 +1,107 @@
+import { css } from 'styled-components'
+
+export const Tipografia = css`
+  h1 {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-size: 2.4rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  h2 {
+    font-family: 'Saira-Light', sans-serif;
+    font-size: 1.8rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  h3 {
+    font-family: 'Saira-Bold', sans-serif;
+    font-size: 1.6rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  h4 {
+    font-family: 'Saira-Semi-Bold', sans-serif;
+    font-size: 1.4rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  h5 {
+    font-family: 'Saira', sans-serif;
+    font-size: 1.4rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  p {
+    font-family: 'Saira', sans-serif;
+    font-size: 1.6rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  a {
+    font-family: 'Poppins-Bold', sans-serif;
+    text-decoration-line: underline;
+    font-size: 1.2rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  button {
+    font-family: 'Poppins-Bold', sans-serif;
+    line-height: 100%;
+  }
+
+  @media screen and (min-width: 1024px) {
+    h1 {
+      font-size: 24px;
+      line-height: 36px;
+    }
+
+    p {
+      font-size: 16px;
+    }
+
+    a {
+      font-size: 14px;
+      line-height: 21px;
+    }
+  }
+
+  @media screen and (max-width: 1200px) {
+    h1 {
+      font-size: 21px;
+      line-height: 31px;
+    }
+
+    p {
+      font-size: 15px;
+    }
+
+    a {
+      font-size: 13px;
+      line-height: 19px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    h1 {
+      font-size: 18px;
+      line-height: 27px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+
+    a {
+      font-size: 12px;
+      line-height: 18px;
+    }
+  }
+`
