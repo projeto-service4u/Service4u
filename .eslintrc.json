@@ -42,14 +42,15 @@
       "@typescript-eslint/parser": [".ts", ".tsx"]
     },
     "import/resolver": {
-      "alias": {
-        "map": [["@", "./src"]]
-      },
       "node": {
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       },
       "typescript": {
         "project": "apps/*/tsconfig.json"
+      },
+      "babel-plugin-root-import": {
+        "rootPathPrefix": "@",
+        "rootPathSuffix": "src"
       }
     },
     "react": {

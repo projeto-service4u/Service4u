@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2017",
+    "target": "es2020",
     "lib": [
       "dom",
       "dom.iterable",
@@ -21,9 +21,11 @@
     "jsx": "react-jsx",
     "baseUrl": "src"
   },
+  "extends": "./tsconfig.paths.json",
   "exclude": [
     "node_modules",
-    "**/node_modules/*"
+    "**/node_modules/*",
+    "build"
   ],
   "include": [
     "src"
