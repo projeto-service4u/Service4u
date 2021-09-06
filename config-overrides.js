@@ -1,9 +1,10 @@
-/* eslint-disable prettier/prettier */
-const { override, addWebpackAlias } = require('customize-cra')
-const path = require('path')
+const { addBabelPlugin, override } = require('customize-cra')
 
-const rootImport = {
-  ['@']: path.resolve(__dirname, 'src')
-}
-
-module.exports = override(addWebpackAlias(rootImport))
+module.exports = override(
+  addBabelPlugin([
+    'babel-plugin-root-import',
+    {
+      rootPathSuffix: 'src'
+    }
+  ])
+)
