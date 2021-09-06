@@ -1,0 +1,22 @@
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  - package-ecosystem: "" # See documentation for possible values
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: "daily"
+name: Dependabot auto-merge
+on: pull_request
+
+jobs:
+    auto-merge:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: ahmadnassri/action-dependabot-auto-merge@v1
+              with:
+                  target: patch
+                  github-token: ${{ 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 }}
