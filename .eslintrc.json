@@ -1,7 +1,7 @@
 {
   "env": {
     "browser": true,
-    "es2021": true,
+    "es2020": true,
     "node": true,
     "jest": true
   },
@@ -32,7 +32,12 @@
       "warn",
       {
         "newlinesBetween": "always",
-        "groups": ["/^react/", "module", ["parent", "sibling", "index"]],
+        "groups": [
+          "/^react/",
+          "module",
+          "/^src/",
+          ["parent", "sibling", "index"]
+        ],
         "alphabetize": { "order": "asc", "ignoreCase": true }
       }
     ]
@@ -46,10 +51,10 @@
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       },
       "typescript": {
-        "project": "apps/*/tsconfig.json"
+        "project": "./tsconfig.json"
       },
       "babel-plugin-root-import": {
-        "rootPathPrefix": "@",
+        "rootPathPrefix": "~",
         "rootPathSuffix": "src"
       }
     },

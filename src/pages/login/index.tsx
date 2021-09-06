@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 
 import { FormControl, InputAdornment, TextField } from '@material-ui/core'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
@@ -11,7 +11,8 @@ import clsx from 'clsx'
 import { useFormik } from 'formik'
 
 import s4uLogo from '../../assets/icones/s4uLogo.svg'
-import Botao from '../botao'
+import Botao from '../../components/botao'
+import AuthContext from '../../contexts/authContext'
 import { formSchema } from './schema'
 import { Container } from './styles'
 import { FormLogin } from './tipos'
@@ -35,6 +36,8 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 const Login: React.FC = () => {
+  const context = useContext(AuthContext)
+
   const initialValues: FormLogin = {
     email: '',
     senha: ''
@@ -44,10 +47,7 @@ const Login: React.FC = () => {
     initialValues: initialValues,
     validationSchema: formSchema,
     onSubmit: values => {
-      setTimeout(() => {
-        alert(JSON.stringify(values, null, 2))
-        formik.setSubmitting(false)
-      }, 3000)
+      context.Login(values.email, values.senha)
     }
   })
 
