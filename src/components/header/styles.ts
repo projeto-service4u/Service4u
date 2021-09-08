@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { Cores } from '../../styles/cores'
+import { Cores } from '../../assets/styles/cores'
 
 export const HeaderContainer = styled.header`
   align-items: center;

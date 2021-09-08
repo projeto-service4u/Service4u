@@ -4,9 +4,6 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import { blue } from '@material-ui/core/colors'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 
-import Menu from '../components/menu'
-
-// import { Container } from './styles';
 import Home from '../pages/home/index'
 import { AuthProvider } from './../contexts/authContext'
 const theme = createMuiTheme({
