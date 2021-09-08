@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes } from 'react'
 
 import styled from 'styled-components'
 
-import { Cores } from '../../styles/cores'
+import { Cores } from '../../assets/styles/cores'
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>
 

@@ -1,13 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+
 import './services/firebase'
 
-import App from './App'
-import Root from './components/root/index'
-
-import './styles/index.css'
+import GlobalStyle from './assets/styles/global'
 import { AuthProvider } from './contexts/authContext'
-import GlobalStyle from './styles/global'
+import Root from './routes/root/index'
+import './assets/styles/index.css'
 
 ReactDOM.render(
   <React.StrictMode>

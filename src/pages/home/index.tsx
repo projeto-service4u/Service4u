@@ -1,16 +1,12 @@
 import React from 'react'
 
-// import { Container } from './styles';
-import Container from './../../components/container/index'
-import Header from './../../components/header/index'
+import App from '../../container'
 
 const Home: React.FC = () => {
   return (
-    <>
-      <Header />
-
-      <h1>TESTE</h1>
-    </>
+    <App>
+      <h1>About</h1>
+    </App>
   )
 }
 

@@ -1,9 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { AppBar, Toolbar } from '@material-ui/core'
-
-// import { Container } from './styles'
+import { Toolbar } from '@material-ui/core'
 
 const Menu: React.FC = () => {
   return (
