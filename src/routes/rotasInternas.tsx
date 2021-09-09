@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 
 import { blue } from '@material-ui/core/colors'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
@@ -21,8 +21,11 @@ const RotasInternas: React.FC = () => {
         <AuthProvider>
           <MuiThemeProvider theme={theme}>
             {/* <Header /> */}
-            <Route exact path="/" component={Home} />
-            <Route exact path="/teste" component={Teste} />
+            <Route path="/" exact component={Home} />
+            {/* <Route path="/teste" exact component={Teste} /> */}
+            <Redirect path="*" to="/" />
+
+            {/* <Route exact path="*" component={Teste} /> */}
           </MuiThemeProvider>
         </AuthProvider>
       </Switch>
