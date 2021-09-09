@@ -1,14 +1,27 @@
 import React from 'react'
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Redirect } from 'react-router-dom'
 
+import { blue } from '@material-ui/core/colors'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+
+import GlobalStyle from '../../src/assets/styles/global'
 import Login from '../pages/Login'
 import { AuthProvider } from './../contexts/authContext'
 
+const theme = createMuiTheme({
+  palette: {
+    primary: blue
+  }
+})
 const RotaLogin: React.FC = () => {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <Route path="/" component={Login} />
+        <MuiThemeProvider theme={theme}>
+          <Route path="/login" component={Login} />
+          <Redirect path="*" to="/login" />
+          <GlobalStyle />
+        </MuiThemeProvider>
       </AuthProvider>
     </BrowserRouter>
   )

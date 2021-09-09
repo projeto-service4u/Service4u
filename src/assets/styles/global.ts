@@ -31,7 +31,8 @@ export default createGlobalStyle`
   body,
   input,
   button,
-  textarea {
+  textarea
+  {
     font: 400 16px 'Poppins', sans-serif;
   }
 

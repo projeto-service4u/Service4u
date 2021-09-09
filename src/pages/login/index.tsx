@@ -14,26 +14,8 @@ import s4uLogo from '../../assets/icones/s4uLogo.svg'
 import Botao from '../../components/Botao'
 import AuthContext from '../../contexts/authContext'
 import { formSchema } from './schema'
-import { Container } from './styles'
+import { Container, useStyles } from './styles'
 import { FormLogin } from './tipos'
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap'
-    },
-    margin: {
-      marginTop: theme.spacing(2)
-    },
-    withoutLabel: {
-      marginTop: theme.spacing(2)
-    },
-    textField: {
-      width: '25ch'
-    }
-  })
-)
 
 const Login: React.FC = () => {
   const context = useContext(AuthContext)
@@ -76,16 +58,22 @@ const Login: React.FC = () => {
             >
               <TextField
                 required
+                size="medium"
                 id="email"
                 label="Email"
                 variant="outlined"
                 name="email"
                 autoFocus
-                className="inputEmail"
                 onChange={formik.handleChange}
                 value={formik.values.email}
                 error={formik.touched.email && Boolean(formik.errors.email)}
                 helperText={formik.touched.email && formik.errors.email}
+                InputLabelProps={{
+                  style: { fontSize: 14, fontFamily: 'Poppins' }
+                }}
+                InputProps={{
+                  style: { fontSize: 14, fontFamily: 'Poppins' }
+                }}
               />
             </FormControl>
             <FormControl
@@ -105,6 +93,12 @@ const Login: React.FC = () => {
                 value={formik.values.senha}
                 error={formik.touched.senha && Boolean(formik.errors.senha)}
                 helperText={formik.touched.senha && formik.errors.senha}
+                InputLabelProps={{
+                  style: { fontSize: 14, fontFamily: 'Poppins' }
+                }}
+                InputProps={{
+                  style: { fontSize: 14, fontFamily: 'Poppins' }
+                }}
               />
             </FormControl>
             <Botao type="submit" disabled={!(formik.isValid && formik.dirty)}>

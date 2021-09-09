@@ -1,3 +1,4 @@
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import styled from 'styled-components'
 
 import { Cores } from '../../assets/styles/cores'
@@ -55,3 +56,28 @@ export const Container = styled.div`
     }
   }
 `
+
+export const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap'
+    },
+    margin: {
+      marginTop: theme.spacing(2)
+    },
+    withoutLabel: {
+      marginTop: theme.spacing(2)
+    },
+    textField: {
+      width: '25ch'
+      // },
+      // textField: {
+      //   fontFamily: 'Poppins, sans-serif',
+    },
+
+    InputLabelProps: {
+      fontSize: 400
+    }
+  })
+)
