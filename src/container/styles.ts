@@ -1,14 +1,17 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-export const Container = styled.main`
-  width: 100vw;
-  min-height: 100vh;
+export const Container = styled.div`
+  ${({ theme }) => css`
+    max-width: 120rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3.2rem;
+    /* margin-top: 100px; */
+  `}
+`
+
+export const Section = styled.div`
+  min-height: 85vh;
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  /* font-family: sans-serif; */
-  /* height: calc(100vh - 34px - 50px - 64px);
-  display: flex;
-  flex-direction: column;
-  padding: 2rem; */
+  align-items: center;
 `

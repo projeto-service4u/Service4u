@@ -1,6 +1,7 @@
 import React from 'react'
 
 import App from '../../container'
+import Header from './../../components/Header/index'
 
 const Home: React.FC = () => {
   return (

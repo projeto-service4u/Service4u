@@ -11,7 +11,7 @@ import clsx from 'clsx'
 import { useFormik } from 'formik'
 
 import s4uLogo from '../../assets/icones/s4uLogo.svg'
-import Botao from '../../components/botao'
+import Botao from '../../components/Botao'
 import AuthContext from '../../contexts/authContext'
 import { formSchema } from './schema'
 import { Container } from './styles'
