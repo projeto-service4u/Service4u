@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 
-import Login from '../pages/login'
+import Login from '../pages/Login'
 import { AuthProvider } from './../contexts/authContext'
 
 const RotaLogin: React.FC = () => {
