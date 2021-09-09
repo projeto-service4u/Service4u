@@ -46,24 +46,55 @@ export function AuthProvider(props: AuthContextProviderProps) {
   async function Login(email: string, senha: string) {
     const provider = new firebase.auth.EmailAuthProvider()
 
-    const result = await auth.signInWithEmailAndPassword(email, senha)
+    const result = await auth
+      .signInWithEmailAndPassword(email, senha)
+      .then(userCredential => {
+        if (userCredential.user) {
+          const { uid, email, refreshToken } = userCredential.user
 
-    if (result.user) {
-      const { uid, email, refreshToken } = result.user
+          if (!email || !refreshToken) {
+            throw new Error('Faltam informações da conta.')
+          }
 
-      if (!email || !refreshToken) {
-        throw new Error('Faltam informações da conta.')
-      }
-
-      setUser({
-        uid: uid,
-        email: email,
-        token: refreshToken
+          return setUser({
+            uid: uid,
+            email: email,
+            token: refreshToken
+          })
+        }
+        //  user = userCredential.user
+        // ...
       })
-      console.log('USER', user)
-    } else {
-      console.log('Erro')
-    }
+      .catch(error => {
+        var errorCode = error.code
+        console.log(
+          '🚀 ~ file: authContext.tsx ~ line 71 ~ Login ~ errorCode',
+          errorCode
+        )
+        var errorMessage = error.message
+        console.log(
+          '🚀 ~ file: authContext.tsx ~ line 73 ~ Login ~ errorMessage: Não foi possível fazer o login '
+        )
+        // ..
+      })
+    console.log('USER', user)
+
+    // if (result.user) {
+    //   const { uid, email, refreshToken } = result.user
+
+    //   if (!email || !refreshToken) {
+    //     throw new Error('Faltam informações da conta.')
+    //   }
+
+    //   setUser({
+    //     uid: uid,
+    //     email: email,
+    //     token: refreshToken
+    //   })
+    //   console.log('USER', user)
+    // } else {
+    //   console.log('Erro')
+    // }
     console.log(result)
   }
   return (
