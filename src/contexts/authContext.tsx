@@ -1,4 +1,6 @@
 import React, { createContext, ReactNode, useEffect, useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.min.css'
 
 import { auth, firebase } from '../services/firebase'
 
@@ -66,15 +68,8 @@ export function AuthProvider(props: AuthContextProviderProps) {
         // ...
       })
       .catch(error => {
-        var errorCode = error.code
-        console.log(
-          '🚀 ~ file: authContext.tsx ~ line 71 ~ Login ~ errorCode',
-          errorCode
-        )
-        var errorMessage = error.message
-        console.log(
-          '🚀 ~ file: authContext.tsx ~ line 73 ~ Login ~ errorMessage: Não foi possível fazer o login '
-        )
+        toast.error('Usuário ou Senha Inválidos')
+
         // ..
       })
     console.log('USER', user)
