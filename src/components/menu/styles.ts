@@ -22,7 +22,7 @@ export const MenuLink = styled.div`
   align-items: center;
   /* margin: 10px auto; */
   justify-content: end;
-  .teste {
+  .link-menu {
     transition: filter 0.2s;
     text-decoration: none;
     font-weight: 500;

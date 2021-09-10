@@ -1,12 +1,7 @@
 import React, { useContext, useEffect } from 'react'
+import { ToastContainer } from 'react-toastify'
 
-import { FormControl, InputAdornment, TextField } from '@material-ui/core'
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
-import {
-  AccountCircle,
-  AlternateEmail,
-  AlternateEmailOutlined
-} from '@material-ui/icons'
+import { FormControl, TextField } from '@material-ui/core'
 import clsx from 'clsx'
 import { useFormik } from 'formik'
 
@@ -47,6 +42,7 @@ const Login: React.FC = () => {
       <div className="container-logo">
         <img src={s4uLogo} alt="Service4U" />
         <strong>Service 4U</strong>
+        <ToastContainer />
       </div>
       <main>
         <div className="main-content">
