@@ -1,16 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { Toolbar, Button, IconButton, Typography } from '@material-ui/core'
+import { Toolbar } from '@material-ui/core'
 
-import s4uLogo from '../../assets/icones/s4uLogo.svg'
+import S4U from '../../assets/imagens/S4U.svg'
 import { MenuContainer, MenuLink, Logo } from './styles'
 
 const Menu: React.FC = () => {
   return (
     <Toolbar>
       <MenuContainer>
-        <Logo>Services4U</Logo>
+        <Logo>
+          <img src={S4U} alt="Logo" />
+        </Logo>
         <MenuLink>
           <Link className="link-menu" to="/">
             Cliente

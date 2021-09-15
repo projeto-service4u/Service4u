@@ -14,6 +14,11 @@ export const Logo = styled.div`
   font-size: x-large;
   font-weight: 700;
   padding: 15px;
+  img {
+    width: 50px;
+    height: 50px;
+    filter: brightness(0) invert(1);
+  }
 `
 
 export const MenuLink = styled.div`
