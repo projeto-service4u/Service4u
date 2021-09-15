@@ -20,6 +20,8 @@ export default createGlobalStyle`
     color: '#29292e';
     margin: 0;
     font-size: 1.6rem;
+    height: 100%;
+    width: 100%;
 
   }
 

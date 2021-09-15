@@ -63,7 +63,9 @@ const Login: React.FC = () => {
                 onChange={formik.handleChange}
                 value={formik.values.email}
                 error={formik.touched.email && Boolean(formik.errors.email)}
-                helperText={formik.touched.email && formik.errors.email}
+                helperText={
+                  formik.touched.email && Boolean(formik.errors.email)
+                }
                 InputLabelProps={{
                   style: { fontSize: 14, fontFamily: 'Poppins' }
                 }}

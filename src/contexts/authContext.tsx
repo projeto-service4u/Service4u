@@ -1,5 +1,5 @@
-import React, { createContext, ReactNode, useEffect, useState } from 'react'
-import { ToastContainer, toast } from 'react-toastify'
+import { createContext, ReactNode, useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
 
 import { auth, firebase } from '../services/firebase'
@@ -64,8 +64,6 @@ export function AuthProvider(props: AuthContextProviderProps) {
             token: refreshToken
           })
         }
-        //  user = userCredential.user
-        // ...
       })
       .catch(error => {
         toast.error('Usuário ou Senha Inválidos')
@@ -74,22 +72,6 @@ export function AuthProvider(props: AuthContextProviderProps) {
       })
     console.log('USER', user)
 
-    // if (result.user) {
-    //   const { uid, email, refreshToken } = result.user
-
-    //   if (!email || !refreshToken) {
-    //     throw new Error('Faltam informações da conta.')
-    //   }
-
-    //   setUser({
-    //     uid: uid,
-    //     email: email,
-    //     token: refreshToken
-    //   })
-    //   console.log('USER', user)
-    // } else {
-    //   console.log('Erro')
-    // }
     console.log(result)
   }
   return (
