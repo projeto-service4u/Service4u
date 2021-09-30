@@ -1,15 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Button } from '@material-ui/core'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 
 import Tabela from '../../components/Tabela'
 import App from '../../container/App'
+import { ModalProdutos } from './Modal'
 import * as P from './styles'
 import { useStyles } from './styles'
 
 const Produtos: React.FC = () => {
   const classes = useStyles()
+  const [modalShow, setModalShow] = useState(false)
 
   return (
     <App>
@@ -23,6 +25,7 @@ const Produtos: React.FC = () => {
               color="primary"
               className={classes.root}
               startIcon={<AddCircleOutlineIcon />}
+              onClick={() => setModalShow(true)}
             >
               Adicionar Item
             </Button>
@@ -30,6 +33,7 @@ const Produtos: React.FC = () => {
         </P.ContainerAcoes>
         <Tabela cabecalho={['Nome', 'Telefone', 'email', 'endereco']} />
       </P.Container>
+      <ModalProdutos show={modalShow} onHide={() => setModalShow(false)} />
     </App>
   )
 }

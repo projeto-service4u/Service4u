@@ -15,8 +15,8 @@ export const Logo = styled.div`
   font-weight: 700;
   padding: 15px;
   img {
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     filter: brightness(0) invert(1);
   }
 `

@@ -1,0 +1,36 @@
+{
+  /* Contrato  */
+
+  "Produtos": {
+    "uid": "string",
+    "nome": "string",
+    "unidadeMedida": "string"
+  },
+
+  /* Contrato Lista Padrão */
+
+  "ListaPadrão": {
+    "uid": "string",
+    "nome": "string",
+    "produtos": "Produtos []"
+  },
+
+  /* Contrato Lista Usuário */
+  //TODO Verificar possibilidade de reaproveitamento de lista
+
+  "Lista Usuário": {
+    "uid": "string",
+    "nome": "string",
+    "produtos": "Produtos []"
+  },
+
+  /* Contrato Usuário */
+
+  "Usuário": {
+    "uid": "string",
+    "nome": "string",
+    "telefone": "number",
+    "email": "string",
+    "lista": "Lista[]"
+  }
+}
