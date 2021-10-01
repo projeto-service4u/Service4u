@@ -1,6 +1,7 @@
 import React, { FormEvent, useEffect, useState } from 'react'
 import { Button, Form, Modal, Row, Col } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify'
 
 import { useFormik } from 'formik'
 
@@ -35,7 +36,10 @@ export const ModalProdutos: React.FC<any> = props => {
         produtoNome: values.produto,
         produtoMedida: values.medida
       })
-
+      toast.success('Produto adicionado com sucesso', {
+        icon: '🚀',
+        theme: 'colored'
+      })
       console.log(produtosRef)
       resetForm()
     }
@@ -48,6 +52,7 @@ export const ModalProdutos: React.FC<any> = props => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
+      <ToastContainer />
       <Container>
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
