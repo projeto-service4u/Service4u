@@ -28,10 +28,9 @@ const Produtos: React.FC = () => {
 
   useEffect(() => {
     database
-      .ref()
-      .child('produtos')
+      .ref('produtos')
+      .once('value')
 
-      .get()
       .then(snapshot => {
         if (snapshot.exists()) {
           snapshot.forEach(childSnapshot => {
@@ -53,7 +52,7 @@ const Produtos: React.FC = () => {
         console.error(error)
       })
     setProdutos(produtosLista)
-  }, [loading])
+  }, [])
 
   return (
     <App>
@@ -81,15 +80,10 @@ const Produtos: React.FC = () => {
             {/* </Skeleton> */}
           </div>
         ) : (
-          <Tabela cabecalho={['Nome', 'Unidade/Medida']} />
+          <Tabela dados={produtos} cabecalho={['Nome', 'Unidade/Medida']} />
         )}
       </P.Container>
-      <ModalProdutos
-        show={modalShow}
-        onHide={() => {
-          setModalShow(false), setLoading(true)
-        }}
-      />
+      <ModalProdutos show={modalShow} onHide={() => setModalShow(false)} />
     </App>
   )
 }
