@@ -34,18 +34,12 @@ const Tabela: React.FC<PropsTable> = (props, ...rest) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
+          {props.dados.map((index, key) => (
+            <tr>
+              <td key={key}>{index.nome}</td>
+              <td key={key}>{index.medida}</td>
+            </tr>
+          ))}
         </tbody>
       </Table>
     </Paper>
