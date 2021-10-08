@@ -28,8 +28,8 @@ const Tabela: React.FC<PropsTable> = (props, ...rest) => {
       >
         <thead>
           <tr>
-            {props.cabecalho.map(index => (
-              <th>{index}</th>
+            {props.cabecalho.map((index, key) => (
+              <th key={key}>{index}</th>
             ))}
           </tr>
         </thead>
@@ -45,11 +45,6 @@ const Tabela: React.FC<PropsTable> = (props, ...rest) => {
             <td>Jacob</td>
             <td>Thornton</td>
             <td>@fat</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Larry the Bird</td>
-            <td>@twitter</td>
           </tr>
         </tbody>
       </Table>
