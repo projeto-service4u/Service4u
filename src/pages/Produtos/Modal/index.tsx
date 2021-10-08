@@ -16,8 +16,6 @@ export const ModalProdutos: React.FC<any> = props => {
     medida: ''
   }
 
-  const [title, setTitle] = useState('')
-  const [newRoom, setNewRoom] = useState('')
   const history = useHistory()
 
   useEffect(() => {
