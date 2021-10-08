@@ -1,17 +1,59 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useLayoutEffect, useCallback } from 'react'
 
-import { Button } from '@material-ui/core'
+import { Button, makeStyles } from '@material-ui/core'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
+import Skeleton from '@material-ui/lab/Skeleton'
 
 import Tabela from '../../components/Tabela'
 import App from '../../container/App'
+import { database, firebase } from '../../services/firebase'
 import { ModalProdutos } from './Modal'
 import * as P from './styles'
 import { useStyles } from './styles'
+import { ListaProdutos } from './tipos'
 
 const Produtos: React.FC = () => {
   const classes = useStyles()
   const [modalShow, setModalShow] = useState(false)
+  const [produtos, setProdutos] = useState<ListaProdutos[]>([])
+  const [loading, setLoading] = useState(true)
+  const [contemProdutos, setContemProdutos] = useState(false)
+  const produtosLista = []
+
+  // const useStyles = makeStyles({
+  //   root: {
+  //     width: 300
+  //   }
+  // })
+
+  useEffect(() => {
+    database
+      .ref()
+      .child('produtos')
+
+      .get()
+      .then(snapshot => {
+        if (snapshot.exists()) {
+          snapshot.forEach(childSnapshot => {
+            const key = childSnapshot.key
+            const data = childSnapshot.val()
+            produtosLista.push({
+              uid: key,
+              medida: data.produtoMedida,
+              nome: data.produtoNome
+            })
+            // ...
+          })
+        } else {
+          console.log('No data available')
+        }
+        setLoading(false)
+      })
+      .catch(error => {
+        console.error(error)
+      })
+    setProdutos(produtosLista)
+  }, [loading])
 
   return (
     <App>
@@ -31,9 +73,23 @@ const Produtos: React.FC = () => {
             </Button>
           </P.BotaoAdicionar>
         </P.ContainerAcoes>
-        <Tabela cabecalho={['Nome', 'Telefone', 'email', 'endereco']} />
+        {loading ? (
+          <div>
+            <Skeleton style={{ height: 100, width: '100%' }} />
+            <Skeleton style={{ height: 100, width: '100%' }} />
+            {/* <Tabela cabecalho={['Nome', 'Unidade/Medida']} /> */}
+            {/* </Skeleton> */}
+          </div>
+        ) : (
+          <Tabela cabecalho={['Nome', 'Unidade/Medida']} />
+        )}
       </P.Container>
-      <ModalProdutos show={modalShow} onHide={() => setModalShow(false)} />
+      <ModalProdutos
+        show={modalShow}
+        onHide={() => {
+          setModalShow(false), setLoading(true)
+        }}
+      />
     </App>
   )
 }

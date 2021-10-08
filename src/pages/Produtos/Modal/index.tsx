@@ -25,6 +25,8 @@ export const ModalProdutos: React.FC<any> = props => {
       produto: '',
       medida: ''
     })
+
+    console.log()
   }, [])
 
   const formik = useFormik({
@@ -64,24 +66,30 @@ export const ModalProdutos: React.FC<any> = props => {
             <Form onSubmit={formik.handleSubmit}>
               <Row>
                 <Col>
+                  <Form.Label>Nome Produto</Form.Label>
                   <Form.Control
                     size="lg"
-                    placeholder="Produto"
+                    placeholder="ex: Lata de tinta"
                     name="produto"
                     onChange={formik.handleChange}
                     value={formik.values.produto}
                   />
                 </Col>
                 <Col>
+                  <Form.Label>Unidade/Medida</Form.Label>
                   <Form.Control
                     size="lg"
-                    placeholder="Medida"
+                    placeholder="ex: Kg / Unidade / Litros"
                     name="medida"
                     onChange={formik.handleChange}
                     value={formik.values.medida}
                   />
                 </Col>
-                <Col xs lg="2">
+                <Col
+                  style={{ textAlign: 'center', alignSelf: 'flex-end' }}
+                  xs
+                  lg="2"
+                >
                   <Button
                     size="lg"
                     type="submit"
