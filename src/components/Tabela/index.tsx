@@ -29,15 +29,15 @@ const Tabela: React.FC<PropsTable> = (props, ...rest) => {
         <thead>
           <tr>
             {props.cabecalho.map((index, key) => (
-              <th key={key}>{index}</th>
+              <th key={key.toString()}>{index}</th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {props.dados.map((index, key) => (
-            <tr>
-              <td key={key}>{index.nome}</td>
-              <td key={key}>{index.medida}</td>
+          {props.dados.map((dados, id) => (
+            <tr key={id + 1}>
+              <td key={id + 2}>{dados.nome}</td>
+              <td key={id}>{dados.medida}</td>
             </tr>
           ))}
         </tbody>

@@ -26,7 +26,7 @@ const Produtos: React.FC = () => {
   //   }
   // })
 
-  useEffect(() => {
+  const getDadosFirebase = () => {
     database
       .ref('produtos')
       .once('value')
@@ -52,7 +52,22 @@ const Produtos: React.FC = () => {
         console.error(error)
       })
     setProdutos(produtosLista)
+  }
+
+  useEffect(() => {
+    getDadosFirebase()
   }, [])
+
+  useEffect(() => {
+    database.ref('produtos').on('child_added', data => {
+      produtosLista.push({
+        uid: data.key,
+        medida: data.val().produtoMedida,
+        nome: data.val().produtoNome
+      })
+      setProdutos(produtosLista)
+    })
+  }, [modalShow])
 
   return (
     <App>
