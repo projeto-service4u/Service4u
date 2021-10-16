@@ -5,7 +5,7 @@ import { blue } from '@material-ui/core/colors'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 
 import GlobalStyle from '../../src/assets/styles/global'
-import Login from '../pages/Login'
+import Login from '../pages/login'
 import { AuthProvider } from './../contexts/authContext'
 
 const theme = createMuiTheme({
