@@ -20,12 +20,6 @@ const Produtos: React.FC = () => {
   const [contemProdutos, setContemProdutos] = useState(false)
   const produtosLista = []
 
-  // const useStyles = makeStyles({
-  //   root: {
-  //     width: 300
-  //   }
-  // })
-
   const getDadosFirebase = () => {
     database
       .ref('produtos')
@@ -52,6 +46,7 @@ const Produtos: React.FC = () => {
         console.error(error)
       })
     setProdutos(produtosLista)
+    console.log(produtos.length / 2)
   }
 
   useEffect(() => {
@@ -91,8 +86,6 @@ const Produtos: React.FC = () => {
           <div>
             <Skeleton style={{ height: 100, width: '100%' }} />
             <Skeleton style={{ height: 100, width: '100%' }} />
-            {/* <Tabela cabecalho={['Nome', 'Unidade/Medida']} /> */}
-            {/* </Skeleton> */}
           </div>
         ) : (
           <Tabela dados={produtos} cabecalho={['Nome', 'Unidade/Medida']} />
