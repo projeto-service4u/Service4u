@@ -26,7 +26,7 @@ const Menu: React.FC = () => {
           <Link className="link-menu" to="/home">
             Lista
           </Link>
-          <Link className="link-menu" to="/home">
+          <Link className="link-menu" to="/lista-padrao">
             Lista Padrão
           </Link>
           <button className="logout" onClick={() => context.Logout()}>
