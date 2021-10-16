@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
 
@@ -14,6 +15,7 @@ type AuthContextType = {
   signed: boolean
   user: User | undefined
   Login: (email: string, senha: string) => Promise<void>
+  Logout: () => Promise<void>
 }
 
 type AuthContextProviderProps = {
@@ -23,6 +25,7 @@ const AuthContext = createContext({} as AuthContextType)
 
 export function AuthProvider(props: AuthContextProviderProps) {
   const [user, setUser] = useState<User>()
+  const history = useHistory()
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
@@ -74,8 +77,22 @@ export function AuthProvider(props: AuthContextProviderProps) {
 
     console.log(result)
   }
+
+  async function Logout() {
+    setUser({
+      uid: '',
+      email: '',
+      token: ''
+    })
+    localStorage.clear()
+    firebase.auth().signOut()
+    window.location.reload()
+  }
+
   return (
-    <AuthContext.Provider value={{ signed: Boolean(user), user, Login }}>
+    <AuthContext.Provider
+      value={{ signed: Boolean(user), user, Login, Logout }}
+    >
       {props.children}
     </AuthContext.Provider>
   )

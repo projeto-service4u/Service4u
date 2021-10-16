@@ -27,7 +27,8 @@ export const MenuLink = styled.div`
   align-items: center;
   /* margin: 10px auto; */
   justify-content: end;
-  .link-menu {
+  .link-menu,
+  button {
     transition: filter 0.2s;
     text-decoration: none;
     font-weight: 500;
@@ -41,5 +42,10 @@ export const MenuLink = styled.div`
       opacity: 0.8;
       cursor: not-allowed;
     }
+  }
+  .logout {
+    background: transparent;
+    color: white;
+    border: none;
   }
 `
