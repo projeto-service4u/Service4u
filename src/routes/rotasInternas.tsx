@@ -5,6 +5,7 @@ import { blue } from '@material-ui/core/colors'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 
 import Home from '../pages/home/index'
+import ListaPadrao from '../pages/listas/lista-padrao'
 import Produtos from '../pages/Produtos/index'
 import { AuthProvider } from './../contexts/authContext'
 const theme = createMuiTheme({
@@ -22,6 +23,7 @@ const RotasInternas: React.FC = () => {
             {/* <Header /> */}
             <Route path="/" exact component={Home} />
             <Route path="/produtos" exact component={Produtos} />
+            <Route path="/lista-padrao" exact component={ListaPadrao} />
             <Redirect path="*" to="/" />
 
             {/* <Route exact path="*" component={Teste} /> */}
