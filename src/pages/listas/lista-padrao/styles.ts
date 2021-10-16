@@ -8,9 +8,12 @@ export const Container = styled.div`
   width: 100%;
   flex-direction: column;
   text-align: center;
+<<<<<<< HEAD
   .th-nome {
     width: 60%;
   }
+=======
+>>>>>>> 23ff7e8 (🚧 #S4U-24 | Tabela visualizacao lista padrao)
 `
 
 export const ContainerAcoes = styled.div`
