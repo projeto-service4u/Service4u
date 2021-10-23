@@ -17,13 +17,17 @@ import { useStyles } from './styles'
 const ListasPadrao: React.FC = () => {
   const classes = useStyles()
   const history = useHistory()
+<<<<<<< HEAD
   const [lista, setLista] = useState<ListaPadrao[]>([])
   const [loading, setLoading] = useState(true)
   const listaPadrao = []
+=======
+>>>>>>> 987a9d3 (🚧 #S4U-24 | Retornando dados do firebase e populando select)
 
   const novaLista = () => {
     history.push('/nova-lista-padrao')
   }
+<<<<<<< HEAD
 
   const getDadosFirebase = async () => {
     await database
@@ -70,6 +74,8 @@ const ListasPadrao: React.FC = () => {
   useEffect(() => {
     getDadosFirebase()
   }, [deletarLista])
+=======
+>>>>>>> 987a9d3 (🚧 #S4U-24 | Retornando dados do firebase e populando select)
 
   return (
     <App>

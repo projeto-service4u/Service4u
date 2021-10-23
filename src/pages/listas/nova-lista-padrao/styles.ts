@@ -41,7 +41,11 @@ export const Titulo = styled.div`
 `
 export const BotaoAdicionar = styled.div`
   display: flex;
+<<<<<<< HEAD
   justify-content: space-around;
+=======
+  justify-content: end;
+>>>>>>> 987a9d3 (🚧 #S4U-24 | Retornando dados do firebase e populando select)
   height: 3 vh;
   align-items: flex-end;
   width: 30%;
@@ -76,11 +80,14 @@ export const DivProdutosBotao = styled.div`
     width: 100%;
   }
 `
+<<<<<<< HEAD
 export const ContainerTabela = styled.div`
   display: flex;
   /* width: 80%; */
   margin-top: 0.5%;
 `
+=======
+>>>>>>> 987a9d3 (🚧 #S4U-24 | Retornando dados do firebase e populando select)
 
 export const useStyles = makeStyles({
   root: {
@@ -94,6 +101,7 @@ export const useStyles = makeStyles({
       color: `${Cores.PRIMARIA_1_CLARO}`
     }
   },
+<<<<<<< HEAD
   voltar: {
     width: '8vw',
     minWidth: '8vw',
@@ -106,6 +114,8 @@ export const useStyles = makeStyles({
       color: `${Cores.BRANCO}`
     }
   },
+=======
+>>>>>>> 987a9d3 (🚧 #S4U-24 | Retornando dados do firebase e populando select)
   table: {
     minWidth: 650
   },

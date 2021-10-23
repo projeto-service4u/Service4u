@@ -5,7 +5,11 @@ import { blue } from '@material-ui/core/colors'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 
 import Home from '../pages/home/index'
+<<<<<<< HEAD
 import ListasPadrao from '../pages/listas/lista-padrao'
+=======
+import ListaPadrao from '../pages/listas/lista-padrao'
+>>>>>>> 987a9d3 (🚧 #S4U-24 | Retornando dados do firebase e populando select)
 import NovaListaPadrao from '../pages/listas/nova-lista-padrao'
 import Produtos from '../pages/Produtos/index'
 import { AuthProvider } from './../contexts/authContext'
@@ -25,17 +29,24 @@ const RotasInternas: React.FC = () => {
             {/* <Header /> */}
             <Route path="/" exact component={Home} />
             <Route path="/produtos" exact component={Produtos} />
+<<<<<<< HEAD
             <Route path="/lista-padrao" exact component={ListasPadrao} />
+=======
+            <Route path="/lista-padrao" exact component={ListaPadrao} />
+>>>>>>> 987a9d3 (🚧 #S4U-24 | Retornando dados do firebase e populando select)
             <Route
               path="/nova-lista-padrao"
               exact
               component={NovaListaPadrao}
             />
+<<<<<<< HEAD
             <Route
               path="/visualizar-lista/:uid"
               exact
               component={VisualizarLista}
             />
+=======
+>>>>>>> 987a9d3 (🚧 #S4U-24 | Retornando dados do firebase e populando select)
             <Redirect path="*" to="/" />
 
             {/* <Route exact path="*" component={Teste} /> */}
