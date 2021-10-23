@@ -1,6 +1,7 @@
 import React from 'react'
 import { Table } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
+import { useHistory } from 'react-router'
 
 import * as M from '@material-ui/core'
 import Paper from '@material-ui/core/Paper'
@@ -13,6 +14,11 @@ import { useStyles } from './styles'
 
 const ListaPadrao: React.FC = () => {
   const classes = useStyles()
+  const history = useHistory()
+
+  const novaLista = () => {
+    history.push('/nova-lista-padrao')
+  }
 
   return (
     <App>
@@ -26,6 +32,7 @@ const ListaPadrao: React.FC = () => {
               color="primary"
               className={classes.root}
               startIcon={<AddCircleOutlineIcon />}
+              onClick={novaLista}
             >
               Adicionar Nova lista
             </M.Button>
