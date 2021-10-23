@@ -9,7 +9,6 @@ import { MenuContainer, MenuLink, Logo } from './styles'
 
 const Menu: React.FC = () => {
   const context = useContext(AuthContext)
-  console.log('🚀 ~ file: index.tsx ~ line 12 ~ user')
   return (
     <Toolbar>
       <MenuContainer>
