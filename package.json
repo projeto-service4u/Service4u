@@ -75,6 +75,8 @@
     "@typescript-eslint/parser": "4.29.3",
     "babel-eslint": "10.1.0",
     "customize-cra": "^1.0.0",
+    "cypress": "^8.6.0",
+    "cypress-cucumber-preprocessor": "^4.3.0",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-config-standard": "16.0.3",
@@ -90,5 +92,8 @@
     "react-scripts": "4.0.3",
     "react-toastify": "^8.0.2",
     "tsconfig-paths": "3.11.0"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
   }
 }
