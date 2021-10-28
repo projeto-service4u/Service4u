@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useLayoutEffect, useCallback } from 'react'
+import React, {
+  useState,
+  useEffect,
+  useLayoutEffect,
+  useCallback,
+  useMemo
+} from 'react'
 
 import { Button, makeStyles } from '@material-ui/core'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
@@ -17,7 +23,7 @@ const Produtos: React.FC = () => {
   const [modalShow, setModalShow] = useState(false)
   const [produtos, setProdutos] = useState<ListaProdutos[]>([])
   const [loading, setLoading] = useState(true)
-  const [contemProdutos, setContemProdutos] = useState(false)
+  const [contemNovosProdutos, setContemNovosProdutos] = useState(false)
   const produtosLista = []
 
   const getDadosFirebase = () => {
@@ -51,9 +57,15 @@ const Produtos: React.FC = () => {
 
   useEffect(() => {
     getDadosFirebase()
+
+    return () => getDadosFirebase()
   }, [])
 
   useEffect(() => {
+    setContemNovosProdutos(true)
+  }, [modalShow])
+
+  useMemo(() => {
     database.ref('produtos').on('child_added', data => {
       produtosLista.push({
         uid: data.key,
@@ -62,7 +74,7 @@ const Produtos: React.FC = () => {
       })
       setProdutos(produtosLista)
     })
-  }, [modalShow])
+  }, [contemNovosProdutos])
 
   return (
     <App>

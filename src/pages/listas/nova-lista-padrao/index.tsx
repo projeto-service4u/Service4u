@@ -5,23 +5,33 @@ import Select from 'react-select'
 import AsyncSelect from 'react-select/async'
 
 import * as M from '@material-ui/core'
+import Skeleton from '@material-ui/lab/Skeleton'
+import { useAsyncEffect } from '@react-hook/async'
 
 import { database, firebase } from '../../../services/firebase'
 import { ListaProdutos } from '../../Produtos/tipos'
 import App from './../../../container/App'
 import * as P from './styles'
 import { useStyles } from './styles'
+import { ListaPadrao } from './tipos'
 
 const NovaListaPadrao: React.FC = () => {
   const classes = useStyles()
   const [title, setTitle] = useState('')
+  const [produto, setProduto] = useState('')
+  const [quantidade, setQuantidade] = useState('')
   const [produtos, setProdutos] = useState<ListaProdutos[]>([])
-  const produtosLista = []
+  const [lista, setLista] = useState<ListaPadrao[]>([])
   const [options, setOptions] = useState([])
   const [selectedOption, setSelectedOption] = useState()
+  const [medida, setMedida] = useState('')
   const [preencheInputUnidade, setPreencheInputUnidade] = useState(null)
-  const getDadosFirebase = async () => {
-    await database
+  const [loading, setLoading] = useState(true)
+  const produtosLista = []
+  const produtoLista = []
+
+  const getDadosFirebase = () => {
+    database
       .ref('produtos')
       .once('value')
 
@@ -43,19 +53,21 @@ const NovaListaPadrao: React.FC = () => {
         } else {
           console.log('No data available')
         }
+        setLoading(false)
       })
       .catch(error => {
         console.error(error)
       })
+
     setProdutos(produtosLista)
   }
 
   useEffect(() => {
-    console.log('teste', produtos)
     getDadosFirebase()
   }, [])
 
   const handleChange = selectedOption => {
+    setProduto(selectedOption.value)
     produtos.find(function (post, index) {
       if (post.nome == selectedOption.value) {
         setPreencheInputUnidade(post)
@@ -63,6 +75,28 @@ const NovaListaPadrao: React.FC = () => {
       }
     })
   }
+
+  const teste = () => {
+    produtoLista.push({
+      nome: produto,
+      medida: preencheInputUnidade?.medida,
+      quantidade: quantidade
+    })
+
+    lista.push({
+      nome: title,
+      produtos: produtoLista
+    })
+
+    setLista(lista)
+  }
+  useEffect(() => {
+    console.log(
+      '🚀 ~ file: index.tsx ~ line 90 ~ teste ~ produtoLista',
+      produtoLista
+    )
+    console.log(lista)
+  }, [lista])
 
   return (
     <App>
@@ -84,6 +118,7 @@ const NovaListaPadrao: React.FC = () => {
               variant="contained"
               color="primary"
               className={classes.root}
+              onClick={teste}
             >
               Salvar lista
             </M.Button>
@@ -102,7 +137,7 @@ const NovaListaPadrao: React.FC = () => {
               <InputGroup.Text>Quantidade</InputGroup.Text>
               <FormControl
                 aria-label="First name"
-                onChange={event => setTitle(event.target.value)}
+                onChange={event => setQuantidade(event.target.value)}
               />
             </InputGroup>
           </P.DivProdutos>
@@ -112,13 +147,13 @@ const NovaListaPadrao: React.FC = () => {
               <FormControl
                 value={preencheInputUnidade?.medida}
                 aria-label="First name"
-                onChange={event => setTitle(event.target.value)}
+                onChange={event => setMedida(preencheInputUnidade?.medida)}
                 readOnly
               />
             </InputGroup>
           </P.DivProdutos>
           <P.DivProdutosBotao>
-            <Button variant="primary" size="lg">
+            <Button variant="primary" size="lg" onClick={teste}>
               Adicionar
             </Button>
           </P.DivProdutosBotao>
