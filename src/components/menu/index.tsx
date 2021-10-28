@@ -21,6 +21,7 @@ const Menu: React.FC = () => {
           </Link>
           <Link className="link-menu" to="/produtos">
             Produtos
+<<<<<<< HEAD
           </Link>
 <<<<<<< HEAD
 
@@ -29,6 +30,10 @@ const Menu: React.FC = () => {
             Lista
           </Link>
 >>>>>>> 23ff7e8 (🚧 #S4U-24 | Tabela visualizacao lista padrao)
+=======
+          </Link>
+
+>>>>>>> b6b34a9 (🚧 #S4U-24 | Tratando dados para montar tabela)
           <Link className="link-menu" to="/lista-padrao">
             Lista Padrão
           </Link>
