@@ -42,10 +42,14 @@ export const Titulo = styled.div`
 export const BotaoAdicionar = styled.div`
   display: flex;
 <<<<<<< HEAD
+<<<<<<< HEAD
   justify-content: space-around;
 =======
   justify-content: end;
 >>>>>>> 987a9d3 (🚧 #S4U-24 | Retornando dados do firebase e populando select)
+=======
+  justify-content: space-around;
+>>>>>>> 389df1d (✨ #S4U-24 | Finalizacao de lista padrao)
   height: 3 vh;
   align-items: flex-end;
   width: 30%;
@@ -108,6 +112,9 @@ export const useStyles = makeStyles({
     }
   },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 389df1d (✨ #S4U-24 | Finalizacao de lista padrao)
   voltar: {
     width: '8vw',
     minWidth: '8vw',
@@ -120,8 +127,11 @@ export const useStyles = makeStyles({
       color: `${Cores.BRANCO}`
     }
   },
+<<<<<<< HEAD
 =======
 >>>>>>> 987a9d3 (🚧 #S4U-24 | Retornando dados do firebase e populando select)
+=======
+>>>>>>> 389df1d (✨ #S4U-24 | Finalizacao de lista padrao)
   table: {
     minWidth: 650
   },

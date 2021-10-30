@@ -18,11 +18,17 @@ const ListasPadrao: React.FC = () => {
   const classes = useStyles()
   const history = useHistory()
 <<<<<<< HEAD
+<<<<<<< HEAD
   const [lista, setLista] = useState<ListaPadrao[]>([])
   const [loading, setLoading] = useState(true)
   const listaPadrao = []
 =======
 >>>>>>> 987a9d3 (🚧 #S4U-24 | Retornando dados do firebase e populando select)
+=======
+  const [lista, setLista] = useState<ListaPadrao[]>([])
+  const [loading, setLoading] = useState(true)
+  const listaPadrao = []
+>>>>>>> 389df1d (✨ #S4U-24 | Finalizacao de lista padrao)
 
   const novaLista = () => {
     history.push('/nova-lista-padrao')
@@ -76,6 +82,52 @@ const ListasPadrao: React.FC = () => {
   }, [deletarLista])
 =======
 >>>>>>> 987a9d3 (🚧 #S4U-24 | Retornando dados do firebase e populando select)
+
+  const getDadosFirebase = async () => {
+    await database
+      .ref('listaPadrao')
+      .once('value')
+
+      .then(snapshot => {
+        if (snapshot.exists()) {
+          snapshot.forEach(childSnapshot => {
+            const key = childSnapshot.key
+            const data = childSnapshot.val()
+            listaPadrao.push({
+              uid: key,
+              nome: data.nome,
+              produtos: data.produtos
+            })
+          })
+        } else {
+          console.log('No data available')
+        }
+        setLoading(false)
+      })
+      .catch(error => {
+        console.error(error)
+      })
+    await setLista(listaPadrao)
+    console.log(
+      '🚀 ~ file: index.tsx ~ line 53 ~ getDadosFirebase ~ listaPadrao',
+      listaPadrao
+    )
+  }
+
+  const visualizarLista = uid => {
+    history.push(`/visualizar-lista/${uid}`)
+  }
+
+  const deletarLista = uid => {
+    database.ref(`listaPadrao/${uid}`).remove()
+  }
+
+  useEffect(() => {
+    getDadosFirebase()
+  }, [])
+  useEffect(() => {
+    getDadosFirebase()
+  }, [deletarLista])
 
   return (
     <App>

@@ -307,6 +307,7 @@ const NovaListaPadrao: React.FC = () => {
             >
               Voltar
             </M.Button>
+<<<<<<< HEAD
 =======
 =======
               onClick={teste}
@@ -319,6 +320,8 @@ const NovaListaPadrao: React.FC = () => {
               Salvar lista
             </M.Button>
 >>>>>>> 987a9d3 (🚧 #S4U-24 | Retornando dados do firebase e populando select)
+=======
+>>>>>>> 389df1d (✨ #S4U-24 | Finalizacao de lista padrao)
           </P.BotaoAdicionar>
         </P.ContainerAcoes>
         <P.ContainerProdutos>
