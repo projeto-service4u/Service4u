@@ -8,6 +8,9 @@ export const Container = styled.div`
   width: 100%;
   flex-direction: column;
   text-align: center;
+  .th-nome {
+    width: 60%;
+  }
 `
 
 export const ContainerAcoes = styled.div`
