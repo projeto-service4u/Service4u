@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import PrintProvider, { Print, NoPrint } from 'react-easy-print'
 import { useHistory } from 'react-router'
 import { useParams } from 'react-router-dom'
-import ReactToPrint, { useReactToPrint } from 'react-to-print'
 
 import { Button, makeStyles } from '@material-ui/core'
 import Skeleton from '@material-ui/lab/Skeleton'

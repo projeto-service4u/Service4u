@@ -1794,7 +1794,11 @@
     regenerator-runtime "^0.12.0"
 
 =======
+<<<<<<< HEAD
 >>>>>>> 987a9d3 (🚧 #S4U-24 | Retornando dados do firebase e populando select)
+=======
+>>>>>>> 389df1d5cf9f0fe29ae23d6d1a0643002c0a8aaa
+>>>>>>> 20a3c23c2f38563fb1cea1aab7d902a29f1efdd4
 "@babel/runtime@^7.1.2", "@babel/runtime@^7.10.5", "@babel/runtime@^7.12.0", "@babel/runtime@^7.12.1", "@babel/runtime@^7.12.13", "@babel/runtime@^7.13.10", "@babel/runtime@^7.13.16", "@babel/runtime@^7.14.0", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.4", "@babel/runtime@^7.6.2", "@babel/runtime@^7.6.3", "@babel/runtime@^7.8.3", "@babel/runtime@^7.8.7":
   version "7.15.4"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.15.4.tgz#fd17d16bfdf878e6dd02d19753a39fa8a8d9c84a"
@@ -1995,7 +1999,11 @@
     lodash.once "^4.1.1"
 
 =======
+<<<<<<< HEAD
 >>>>>>> 987a9d3 (🚧 #S4U-24 | Retornando dados do firebase e populando select)
+=======
+>>>>>>> 389df1d5cf9f0fe29ae23d6d1a0643002c0a8aaa
+>>>>>>> 20a3c23c2f38563fb1cea1aab7d902a29f1efdd4
 "@emotion/cache@^11.4.0", "@emotion/cache@^11.5.0":
   version "11.5.0"
   resolved "https://registry.yarnpkg.com/@emotion/cache/-/cache-11.5.0.tgz#a5eb78cbef8163939ee345e3ddf0af217b845e62"
@@ -14075,7 +14083,11 @@ subarg@^1.0.0:
     minimist "^1.1.0"
 
 =======
+<<<<<<< HEAD
 >>>>>>> 987a9d3 (🚧 #S4U-24 | Retornando dados do firebase e populando select)
+=======
+>>>>>>> 389df1d5cf9f0fe29ae23d6d1a0643002c0a8aaa
+>>>>>>> 20a3c23c2f38563fb1cea1aab7d902a29f1efdd4
 supports-color@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-2.0.0.tgz#535d045ce6b6363fa40117084629995e9df324c7"
@@ -15543,7 +15555,7 @@ yarn@^1.22.11:
   version "1.22.17"
   resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.22.17.tgz#bf910747d22497b573131f7341c0e1d15c74036c"
   integrity sha512-H0p241BXaH0UN9IeH//RT82tl5PfNraVpSpEoW+ET7lmopNC61eZ+A+IDvU8FM6Go5vx162SncDL8J1ZjRBriQ==
-<<<<<<< HEAD
+
 
 yauzl@^2.10.0:
   version "2.10.0"
@@ -15552,8 +15564,7 @@ yauzl@^2.10.0:
   dependencies:
     buffer-crc32 "~0.2.3"
     fd-slicer "~1.1.0"
-=======
->>>>>>> 987a9d3 (🚧 #S4U-24 | Retornando dados do firebase e populando select)
+
 
 yocto-queue@^0.1.0:
   version "0.1.0"
