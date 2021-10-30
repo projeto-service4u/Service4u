@@ -8,18 +8,9 @@ export const Container = styled.div`
   width: 100%;
   flex-direction: column;
   text-align: center;
-<<<<<<< HEAD
-<<<<<<< HEAD
   .th-nome {
     width: 60%;
   }
-=======
->>>>>>> 23ff7e8 (🚧 #S4U-24 | Tabela visualizacao lista padrao)
-=======
-  .th-nome {
-    width: 60%;
-  }
->>>>>>> 389df1d (✨ #S4U-24 | Finalizacao de lista padrao)
 `
 
 export const ContainerAcoes = styled.div`
