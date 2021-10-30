@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { Form, FormControl, InputGroup } from 'react-bootstrap'
+import { FormControl, InputGroup } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import Select from 'react-select'
-import AsyncSelect from 'react-select/async'
+import { ToastContainer, toast } from 'react-toastify'
 
 import * as M from '@material-ui/core'
-import Skeleton from '@material-ui/lab/Skeleton'
-import { useAsyncEffect } from '@react-hook/async'
 
 import { database, firebase } from '../../../services/firebase'
 import { ListaProdutos } from '../../Produtos/tipos'
+import Tabela from './../../../components/Tabela/index'
 import App from './../../../container/App'
 import * as P from './styles'
 import { useStyles } from './styles'
@@ -28,7 +27,8 @@ const NovaListaPadrao: React.FC = () => {
   const [preencheInputUnidade, setPreencheInputUnidade] = useState(null)
   const [loading, setLoading] = useState(true)
   const produtosLista = []
-  const produtoLista = []
+  const [produtoLista, setProdutoLista] = useState<ListaProdutos[]>([])
+  const listagemProdutos = []
 
   const getDadosFirebase = () => {
     database
@@ -71,35 +71,48 @@ const NovaListaPadrao: React.FC = () => {
     produtos.find(function (post, index) {
       if (post.nome == selectedOption.value) {
         setPreencheInputUnidade(post)
-        console.log(preencheInputUnidade)
       }
     })
   }
 
-  const teste = () => {
-    produtoLista.push({
-      nome: produto,
-      medida: preencheInputUnidade?.medida,
-      quantidade: quantidade
-    })
-
-    lista.push({
-      nome: title,
-      produtos: produtoLista
-    })
-
-    setLista(lista)
+  const adicionarProduto = () => {
+    setProdutoLista([
+      ...produtoLista,
+      {
+        nome: produto,
+        medida: preencheInputUnidade?.medida,
+        quantidade: quantidade
+      }
+    ])
   }
   useEffect(() => {
-    console.log(
-      '🚀 ~ file: index.tsx ~ line 90 ~ teste ~ produtoLista',
-      produtoLista
-    )
-    console.log(lista)
-  }, [lista])
+    console.log(produtoLista)
+  }, [produtoLista])
+
+  const criarLista = () => {
+    try {
+      const listaRef = database.ref('listaPadrao')
+      listaRef.push({ nome: title, produtos: produtoLista })
+      toast.success('Lista adicionada com sucesso', {
+        icon: '🚀',
+        theme: 'colored'
+      })
+      setLista([])
+      setProdutoLista([])
+      setTitle('')
+      setQuantidade('')
+      console.log(lista)
+    } catch (e) {
+      toast.error('Erro ao adicionar lista, tente novamente!', {
+        theme: 'colored'
+      })
+    }
+  }
 
   return (
     <App>
+      <ToastContainer />
+
       <P.Container>
         <P.ContainerAcoes>
           <P.Titulo>Nova Lista Padrão</P.Titulo>
@@ -109,6 +122,7 @@ const NovaListaPadrao: React.FC = () => {
               <FormControl
                 aria-label="First name"
                 onChange={event => setTitle(event.target.value)}
+                value={title}
               />
             </InputGroup>
           </P.NomeLista>
@@ -118,7 +132,8 @@ const NovaListaPadrao: React.FC = () => {
               variant="contained"
               color="primary"
               className={classes.root}
-              onClick={teste}
+              onClick={criarLista}
+              disabled={!title}
             >
               Salvar lista
             </M.Button>
@@ -130,6 +145,7 @@ const NovaListaPadrao: React.FC = () => {
               options={options}
               value={selectedOption}
               onChange={handleChange}
+              classNamePrefix="mySelect"
             />
           </P.DivProdutos>
           <P.DivProdutos>
@@ -138,6 +154,7 @@ const NovaListaPadrao: React.FC = () => {
               <FormControl
                 aria-label="First name"
                 onChange={event => setQuantidade(event.target.value)}
+                value={quantidade}
               />
             </InputGroup>
           </P.DivProdutos>
@@ -153,11 +170,17 @@ const NovaListaPadrao: React.FC = () => {
             </InputGroup>
           </P.DivProdutos>
           <P.DivProdutosBotao>
-            <Button variant="primary" size="lg" onClick={teste}>
+            <Button variant="primary" size="lg" onClick={adicionarProduto}>
               Adicionar
             </Button>
           </P.DivProdutosBotao>
         </P.ContainerProdutos>
+        <P.ContainerTabela>
+          <Tabela
+            dados={produtoLista}
+            cabecalho={['Nome', 'Quantidade', 'Unidade - Medida']}
+          />
+        </P.ContainerTabela>
       </P.Container>
     </App>
   )

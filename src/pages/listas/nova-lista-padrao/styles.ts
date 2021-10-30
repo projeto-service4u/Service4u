@@ -76,6 +76,11 @@ export const DivProdutosBotao = styled.div`
     width: 100%;
   }
 `
+export const ContainerTabela = styled.div`
+  display: flex;
+  /* width: 80%; */
+  margin-top: 0.5%;
+`
 
 export const useStyles = makeStyles({
   root: {
