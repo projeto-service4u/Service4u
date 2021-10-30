@@ -39,16 +39,8 @@ const VisualizarLista: React.FC = () => {
           snapshot
           const key = snapshot.key
           const data = snapshot.val()
-          console.log(
-            '🚀 ~ file: index.tsx ~ line 37 ~ getDadosFirebase ~ data',
-            data
-          )
 
           setLista(data)
-          // listaPadrao.push({
-          //   nome: data.nome,
-          //   produtos: data.produtos
-          // })
         } else {
           console.log('No data available')
         }
