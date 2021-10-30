@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { FormControl, InputGroup } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import { useHistory } from 'react-router'
@@ -11,14 +12,21 @@ import Button from 'react-bootstrap/Button'
 import Select from 'react-select'
 import AsyncSelect from 'react-select/async'
 >>>>>>> 987a9d3 (🚧 #S4U-24 | Retornando dados do firebase e populando select)
+=======
+import { FormControl, InputGroup } from 'react-bootstrap'
+import Button from 'react-bootstrap/Button'
+import Select from 'react-select'
+import { ToastContainer, toast } from 'react-toastify'
+>>>>>>> cae2ae6 (🚧 #S4U-24 | Criacao de listas finalizado)
 
 import * as M from '@material-ui/core'
-import Skeleton from '@material-ui/lab/Skeleton'
-import { useAsyncEffect } from '@react-hook/async'
 
 import { database, firebase } from '../../../services/firebase'
 import { ListaProdutos } from '../../Produtos/tipos'
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> cae2ae6 (🚧 #S4U-24 | Criacao de listas finalizado)
 import Tabela from './../../../components/Tabela/index'
 import App from './../../../container/App'
 import * as P from './styles'
@@ -73,7 +81,8 @@ const NovaListaPadrao: React.FC = () => {
 =======
   const [loading, setLoading] = useState(true)
   const produtosLista = []
-  const produtoLista = []
+  const [produtoLista, setProdutoLista] = useState<ListaProdutos[]>([])
+  const listagemProdutos = []
 
   const getDadosFirebase = () => {
     database
@@ -147,14 +156,20 @@ const NovaListaPadrao: React.FC = () => {
     produtos.find(function (post, index) {
       if (post.nome == selectedOption.value) {
         setPreencheInputUnidade(post)
+<<<<<<< HEAD
         console.log(preencheInputUnidade)
 >>>>>>> 987a9d3 (🚧 #S4U-24 | Retornando dados do firebase e populando select)
+=======
+>>>>>>> cae2ae6 (🚧 #S4U-24 | Criacao de listas finalizado)
       }
     })
   }
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> cae2ae6 (🚧 #S4U-24 | Criacao de listas finalizado)
   const adicionarProduto = () => {
     setProdutoLista([
       ...produtoLista,
@@ -164,6 +179,7 @@ const NovaListaPadrao: React.FC = () => {
         quantidade: quantidade
       }
     ])
+<<<<<<< HEAD
   }
   useEffect(() => {
     console.log(produtoLista)
@@ -212,19 +228,42 @@ const NovaListaPadrao: React.FC = () => {
     })
 
     setLista(lista)
+=======
+>>>>>>> cae2ae6 (🚧 #S4U-24 | Criacao de listas finalizado)
   }
   useEffect(() => {
-    console.log(
-      '🚀 ~ file: index.tsx ~ line 90 ~ teste ~ produtoLista',
-      produtoLista
-    )
-    console.log(lista)
-  }, [lista])
+    console.log(produtoLista)
+  }, [produtoLista])
+
+  const criarLista = () => {
+    try {
+      const listaRef = database.ref('listaPadrao')
+      listaRef.push({ nome: title, produtos: produtoLista })
+      toast.success('Lista adicionada com sucesso', {
+        icon: '🚀',
+        theme: 'colored'
+      })
+      setLista([])
+      setProdutoLista([])
+      setTitle('')
+      setQuantidade('')
+      console.log(lista)
+    } catch (e) {
+      toast.error('Erro ao adicionar lista, tente novamente!', {
+        theme: 'colored'
+      })
+    }
+  }
 
 >>>>>>> b6b34a9 (🚧 #S4U-24 | Tratando dados para montar tabela)
   return (
     <App>
+<<<<<<< HEAD
 >>>>>>> 987a9d3 (🚧 #S4U-24 | Retornando dados do firebase e populando select)
+=======
+      <ToastContainer />
+
+>>>>>>> cae2ae6 (🚧 #S4U-24 | Criacao de listas finalizado)
       <P.Container>
         <P.ContainerAcoes>
           <P.Titulo>Nova Lista Padrão</P.Titulo>
@@ -235,9 +274,13 @@ const NovaListaPadrao: React.FC = () => {
                 aria-label="First name"
                 onChange={event => setTitle(event.target.value)}
 <<<<<<< HEAD
+<<<<<<< HEAD
                 value={title}
 =======
 >>>>>>> 987a9d3 (🚧 #S4U-24 | Retornando dados do firebase e populando select)
+=======
+                value={title}
+>>>>>>> cae2ae6 (🚧 #S4U-24 | Criacao de listas finalizado)
               />
             </InputGroup>
           </P.NomeLista>
@@ -247,6 +290,7 @@ const NovaListaPadrao: React.FC = () => {
               variant="contained"
               color="primary"
               className={classes.root}
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
               onClick={criarLista}
@@ -267,6 +311,10 @@ const NovaListaPadrao: React.FC = () => {
 =======
               onClick={teste}
 >>>>>>> b6b34a9 (🚧 #S4U-24 | Tratando dados para montar tabela)
+=======
+              onClick={criarLista}
+              disabled={!title}
+>>>>>>> cae2ae6 (🚧 #S4U-24 | Criacao de listas finalizado)
             >
               Salvar lista
             </M.Button>
@@ -280,9 +328,13 @@ const NovaListaPadrao: React.FC = () => {
               value={selectedOption}
               onChange={handleChange}
 <<<<<<< HEAD
+<<<<<<< HEAD
               classNamePrefix="mySelect"
 =======
 >>>>>>> 987a9d3 (🚧 #S4U-24 | Retornando dados do firebase e populando select)
+=======
+              classNamePrefix="mySelect"
+>>>>>>> cae2ae6 (🚧 #S4U-24 | Criacao de listas finalizado)
             />
           </P.DivProdutos>
           <P.DivProdutos>
@@ -299,7 +351,11 @@ const NovaListaPadrao: React.FC = () => {
 >>>>>>> 987a9d3 (🚧 #S4U-24 | Retornando dados do firebase e populando select)
 =======
                 onChange={event => setQuantidade(event.target.value)}
+<<<<<<< HEAD
 >>>>>>> b6b34a9 (🚧 #S4U-24 | Tratando dados para montar tabela)
+=======
+                value={quantidade}
+>>>>>>> cae2ae6 (🚧 #S4U-24 | Criacao de listas finalizado)
               />
             </InputGroup>
           </P.DivProdutos>
@@ -325,6 +381,7 @@ const NovaListaPadrao: React.FC = () => {
           <P.DivProdutosBotao>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             <Button variant="primary" size="lg" onClick={adicionarProduto}>
 =======
             <Button variant="primary" size="lg">
@@ -332,19 +389,28 @@ const NovaListaPadrao: React.FC = () => {
 =======
             <Button variant="primary" size="lg" onClick={teste}>
 >>>>>>> b6b34a9 (🚧 #S4U-24 | Tratando dados para montar tabela)
+=======
+            <Button variant="primary" size="lg" onClick={adicionarProduto}>
+>>>>>>> cae2ae6 (🚧 #S4U-24 | Criacao de listas finalizado)
               Adicionar
             </Button>
           </P.DivProdutosBotao>
         </P.ContainerProdutos>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> cae2ae6 (🚧 #S4U-24 | Criacao de listas finalizado)
         <P.ContainerTabela>
           <Tabela
             dados={produtoLista}
             cabecalho={['Nome', 'Quantidade', 'Unidade - Medida']}
           />
         </P.ContainerTabela>
+<<<<<<< HEAD
 =======
 >>>>>>> 987a9d3 (🚧 #S4U-24 | Retornando dados do firebase e populando select)
+=======
+>>>>>>> cae2ae6 (🚧 #S4U-24 | Criacao de listas finalizado)
       </P.Container>
     </App>
   )

@@ -81,13 +81,19 @@ export const DivProdutosBotao = styled.div`
   }
 `
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> cae2ae6 (🚧 #S4U-24 | Criacao de listas finalizado)
 export const ContainerTabela = styled.div`
   display: flex;
   /* width: 80%; */
   margin-top: 0.5%;
 `
+<<<<<<< HEAD
 =======
 >>>>>>> 987a9d3 (🚧 #S4U-24 | Retornando dados do firebase e populando select)
+=======
+>>>>>>> cae2ae6 (🚧 #S4U-24 | Criacao de listas finalizado)
 
 export const useStyles = makeStyles({
   root: {
