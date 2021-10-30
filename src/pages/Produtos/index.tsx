@@ -100,7 +100,7 @@ const Produtos: React.FC = () => {
             <Skeleton style={{ height: 100, width: '100%' }} />
           </div>
         ) : (
-          <Tabela dados={produtos} cabecalho={['Nome', 'Unidade/Medida']} />
+          <Tabela dados={produtos} cabecalho={['Nome', 'Unidade - Medida']} />
         )}
       </P.Container>
       <ModalProdutos show={modalShow} onHide={() => setModalShow(false)} />

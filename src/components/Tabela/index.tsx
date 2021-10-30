@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap'
 
 import Paper from '@material-ui/core/Paper'
@@ -37,6 +37,7 @@ const Tabela: React.FC<PropsTable> = (props, ...rest) => {
           {props.dados.map((dados, id) => (
             <tr key={id + 1}>
               <td key={id + 2}>{dados.nome}</td>
+              {dados.quantidade && <td key={id + 3}>{dados.quantidade}</td>}
               <td key={id}>{dados.medida}</td>
             </tr>
           ))}

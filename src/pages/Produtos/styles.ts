@@ -32,7 +32,7 @@ export const BotaoAdicionar = styled.div`
 
 export const useStyles = makeStyles({
   root: {
-    width: '10vw',
+    minWidth: '12vw',
     height: '5vh',
     fontSize: '12px',
     backgroundColor: `${Cores.SECUNDARIA_2_ESCURO}`,
