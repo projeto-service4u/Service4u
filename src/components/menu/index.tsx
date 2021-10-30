@@ -9,7 +9,6 @@ import { MenuContainer, MenuLink, Logo } from './styles'
 
 const Menu: React.FC = () => {
   const context = useContext(AuthContext)
-  console.log('🚀 ~ file: index.tsx ~ line 12 ~ user')
   return (
     <Toolbar>
       <MenuContainer>
@@ -18,19 +17,16 @@ const Menu: React.FC = () => {
         </Logo>
         <MenuLink>
           <Link className="link-menu" to="/">
-            Cliente
+            Clientes
           </Link>
           <Link className="link-menu" to="/produtos">
-            Produto
+            Produtos
           </Link>
-          <Link className="link-menu" to="/home">
-            Lista
-          </Link>
-          <Link className="link-menu" to="/home">
+          <Link className="link-menu" to="/lista-padrao">
             Lista Padrão
           </Link>
           <button className="logout" onClick={() => context.Logout()}>
-            sair
+            Sair
           </button>
         </MenuLink>
       </MenuContainer>

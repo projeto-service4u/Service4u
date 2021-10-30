@@ -1,13 +1,16 @@
 import { makeStyles } from '@material-ui/core/styles'
 import styled from 'styled-components'
 
-import { Cores } from '../../assets/styles/cores'
+import { Cores } from '../../../assets/styles/cores'
 
 export const Container = styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
   text-align: center;
+  .th-nome {
+    width: 60%;
+  }
 `
 
 export const ContainerAcoes = styled.div`
@@ -48,5 +51,10 @@ export const useStyles = makeStyles({
   skeleton: {
     width: '100%',
     height: '50%'
+  },
+  tabela: {
+    width: '100%',
+    fontFamily: 'Poppins',
+    fontSize: '14px'
   }
 })

@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles'
 import styled from 'styled-components'
 
-import { Cores } from '../../assets/styles/cores'
+import { Cores } from '../../../assets/styles/cores'
 
 export const Container = styled.div`
   display: flex;
@@ -21,25 +21,39 @@ export const ContainerAcoes = styled.div`
     0 1px 1px rgba(166, 173, 201, 0.2);
 `
 
+export const BotaoAdicionar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 22%;
+`
+
 export const Titulo = styled.div`
   display: flex;
   font: 600 20px 'Poppins', sans-serif;
 `
 
-export const BotaoAdicionar = styled.div`
-  display: flex;
-`
-
 export const useStyles = makeStyles({
   root: {
     minWidth: '12vw',
-    height: '5vh',
+    height: '3vh',
     fontSize: '12px',
     backgroundColor: `${Cores.SECUNDARIA_2_ESCURO}`,
     color: `${Cores.PRIMARIA_1_ESCURO}`,
     '&:hover': {
       backgroundColor: `${Cores.SECUNDARIA_2}`,
       color: `${Cores.PRIMARIA_1_CLARO}`
+    }
+  },
+  voltar: {
+    width: '8vw',
+    minWidth: '8vw',
+    height: '3vh',
+    fontSize: '12px',
+    backgroundColor: `${Cores.PRIMARIA_1}`,
+    color: `${Cores.BRANCO}`,
+    '&:hover': {
+      backgroundColor: `${Cores.PRIMARIA_2_CLARO}`,
+      color: `${Cores.BRANCO}`
     }
   },
   table: {

@@ -1,5 +1,6 @@
 export interface ListaProdutos {
-  uid: string
+  uid?: string
   nome: string
   medida: string
+  quantidade?: string
 }

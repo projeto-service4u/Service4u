@@ -40,7 +40,6 @@ export const ModalProdutos: React.FC<any> = props => {
         icon: '🚀',
         theme: 'colored'
       })
-      console.log(produtosRef)
       resetForm()
     }
   })
