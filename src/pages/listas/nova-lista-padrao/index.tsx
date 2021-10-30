@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { FormControl, InputGroup } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
+import { useHistory } from 'react-router'
 import Select from 'react-select'
 import { ToastContainer, toast } from 'react-toastify'
 
@@ -29,6 +30,7 @@ const NovaListaPadrao: React.FC = () => {
   const produtosLista = []
   const [produtoLista, setProdutoLista] = useState<ListaProdutos[]>([])
   const listagemProdutos = []
+  const history = useHistory()
 
   const getDadosFirebase = () => {
     database
@@ -109,6 +111,10 @@ const NovaListaPadrao: React.FC = () => {
     }
   }
 
+  const voltar = () => {
+    history.goBack()
+  }
+
   return (
     <App>
       <ToastContainer />
@@ -136,6 +142,15 @@ const NovaListaPadrao: React.FC = () => {
               disabled={!title}
             >
               Salvar lista
+            </M.Button>
+            <M.Button
+              size="medium"
+              variant="contained"
+              color="primary"
+              className={classes.voltar}
+              onClick={voltar}
+            >
+              Voltar
             </M.Button>
           </P.BotaoAdicionar>
         </P.ContainerAcoes>

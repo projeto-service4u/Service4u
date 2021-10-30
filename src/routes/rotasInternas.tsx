@@ -5,10 +5,11 @@ import { blue } from '@material-ui/core/colors'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 
 import Home from '../pages/home/index'
-import ListaPadrao from '../pages/listas/lista-padrao'
+import ListasPadrao from '../pages/listas/lista-padrao'
 import NovaListaPadrao from '../pages/listas/nova-lista-padrao'
 import Produtos from '../pages/Produtos/index'
 import { AuthProvider } from './../contexts/authContext'
+import VisualizarLista from './../pages/listas/visualizar-lista/index'
 const theme = createMuiTheme({
   palette: {
     primary: blue
@@ -24,11 +25,16 @@ const RotasInternas: React.FC = () => {
             {/* <Header /> */}
             <Route path="/" exact component={Home} />
             <Route path="/produtos" exact component={Produtos} />
-            <Route path="/lista-padrao" exact component={ListaPadrao} />
+            <Route path="/lista-padrao" exact component={ListasPadrao} />
             <Route
               path="/nova-lista-padrao"
               exact
               component={NovaListaPadrao}
+            />
+            <Route
+              path="/visualizar-lista/:uid"
+              exact
+              component={VisualizarLista}
             />
             <Redirect path="*" to="/" />
 

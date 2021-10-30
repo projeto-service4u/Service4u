@@ -8273,6 +8273,11 @@ load-json-file@^4.0.0:
     pify "^3.0.0"
     strip-bom "^3.0.0"
 
+load-styles@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/load-styles/-/load-styles-2.0.0.tgz#a0901c8f80ef0c869454eb580b4efc2f0be48471"
+  integrity sha1-oJAcj4DvDIaUVOtYC078LwvkhHE=
+
 loader-runner@^2.4.0:
   version "2.4.0"
   resolved "https://registry.npmjs.org/loader-runner/-/loader-runner-2.4.0.tgz"
@@ -10676,6 +10681,13 @@ react-dom@17.0.2:
     object-assign "^4.1.1"
     scheduler "^0.20.2"
 
+react-easy-print@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/react-easy-print/-/react-easy-print-0.6.0.tgz#62209c72df4f0c16d9144fc2187b22d7df35844e"
+  integrity sha512-WJnNQCcFYyEMWl0ORfwEHq0Szu8c6TN9jPuxfevwhE4JOFozdi4gK4MN612a2k6jwS4bZOj847xOEyN+FW7oJQ==
+  dependencies:
+    load-styles "^2.0.0"
+
 react-error-overlay@^6.0.9:
   version "6.0.9"
   resolved "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-6.0.9.tgz"
@@ -10840,6 +10852,13 @@ react-text-mask@5.4.3:
   integrity sha1-mR77QpnjDC5sLEbRP2FxaUY+DS0=
   dependencies:
     prop-types "^15.5.6"
+
+react-to-print@^2.14.0:
+  version "2.14.0"
+  resolved "https://registry.yarnpkg.com/react-to-print/-/react-to-print-2.14.0.tgz#376d83391928221e45f4fdf1f7fd02891fc3042d"
+  integrity sha512-R5EbtQY6tqch+Vwoo7hlZ5cZ5Ew81SYessW1Nyb9Uq5njWolwYWyJUh5X7AtGNhVWD6y4ZfyTN+1iW1tR5a84w==
+  dependencies:
+    prop-types "^15.7.2"
 
 react-toastify@^8.0.2:
   version "8.0.2"
