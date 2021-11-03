@@ -8,7 +8,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import * as M from '@material-ui/core'
 
 import { database, firebase } from '../../../services/firebase'
-import { ListaProdutos } from '../../Produtos/tipos'
+import { ListaProdutos } from '../../produtos/tipos'
 import Tabela from './../../../components/Tabela/index'
 import App from './../../../container/App'
 import * as P from './styles'

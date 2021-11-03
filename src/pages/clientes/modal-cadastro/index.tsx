@@ -1,27 +1,28 @@
-import React, { FormEvent, useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Button, Form, Modal, Row, Col } from 'react-bootstrap'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router'
 import { ToastContainer, toast } from 'react-toastify'
 
 import { useFormik } from 'formik'
 
-import Botao from '../../../components/Botao/index'
 import { database, firebase } from '../../../services/firebase'
-import { formProdutoSchema } from './schema'
+import { formCadastroClienteSchema } from './schema'
 import { Container } from './styles'
 
-export const ModalProdutos: React.FC<any> = props => {
+const ModalCadastro: React.FC<any> = props => {
   const initialValues = {
-    produto: '',
-    medida: ''
+    nome: '',
+    email: '',
+    telefone: ''
   }
 
   const history = useHistory()
 
   useEffect(() => {
     formik.setValues({
-      produto: '',
-      medida: ''
+      nome: '',
+      email: '',
+      telefone: ''
     })
 
     console.log()
@@ -29,13 +30,13 @@ export const ModalProdutos: React.FC<any> = props => {
 
   const formik = useFormik({
     initialValues: initialValues,
-    validationSchema: formProdutoSchema,
+    validationSchema: formCadastroClienteSchema,
     onSubmit: (values, { resetForm }) => {
-      const produtosRef = database.ref('/produtos')
-      produtosRef.push({
-        produtoNome: values.produto,
-        produtoMedida: values.medida
-      })
+      // const produtosRef = database.ref('/produtos')
+      // produtosRef.push({
+      //   produtoNome: values.produto,
+      //   produtoMedida: values.medida
+      // })
       toast.success('Produto adicionado com sucesso', {
         icon: '🚀',
         theme: 'colored'
@@ -55,7 +56,7 @@ export const ModalProdutos: React.FC<any> = props => {
       <Container>
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Adicionar Item
+            Adicionar novo cliente
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -63,23 +64,33 @@ export const ModalProdutos: React.FC<any> = props => {
             <Form onSubmit={formik.handleSubmit}>
               <Row>
                 <Col>
-                  <Form.Label>Nome Produto</Form.Label>
+                  <Form.Label>Nome</Form.Label>
                   <Form.Control
                     size="lg"
-                    placeholder="ex: Lata de tinta"
-                    name="produto"
+                    placeholder="Nome do cliente"
+                    name="nome"
                     onChange={formik.handleChange}
-                    value={formik.values.produto}
+                    value={formik.values.nome}
                   />
                 </Col>
                 <Col>
-                  <Form.Label>Unidade/Medida</Form.Label>
+                  <Form.Label>E-mail</Form.Label>
                   <Form.Control
                     size="lg"
-                    placeholder="ex: Kg / Unidade / Litros"
-                    name="medida"
+                    placeholder="E-mail do cliente"
+                    name="email"
                     onChange={formik.handleChange}
-                    value={formik.values.medida}
+                    value={formik.values.email}
+                  />
+                </Col>
+                <Col>
+                  <Form.Label>Telefone</Form.Label>
+                  <Form.Control
+                    size="lg"
+                    placeholder="Telefone do cliente"
+                    name="telefone"
+                    onChange={formik.handleChange}
+                    value={formik.values.telefone}
                   />
                 </Col>
                 <Col
@@ -92,7 +103,7 @@ export const ModalProdutos: React.FC<any> = props => {
                     type="submit"
                     disabled={!(formik.isValid && formik.dirty)}
                   >
-                    Enviar
+                    Salvar
                   </Button>
                 </Col>
               </Row>
@@ -108,3 +119,5 @@ export const ModalProdutos: React.FC<any> = props => {
     </Modal>
   )
 }
+
+export default ModalCadastro
