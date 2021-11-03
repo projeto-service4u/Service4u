@@ -1,4 +1,4 @@
-import { ListaProdutos } from '../../Produtos/tipos'
+import { ListaProdutos } from '../../produtos/tipos'
 
 export interface ListaPadrao {
   uid?: string
