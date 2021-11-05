@@ -24,13 +24,12 @@ import * as P from './styles'
 
 const Clientes: React.FC = () => {
   const history = useHistory()
-  const [title, setTitle] = useState('default title')
 
   const classes = useStyles()
   const [modalShow, setModalShow] = useState(false)
   const [loading, setLoading] = useState(true)
   const [clientes, setClientes] = useState<Cliente[]>([])
-  const [contemNovosProdutos, setContemNovosProdutos] = useState()
+  const [contemNovosClientes, setContemNovosClientes] = useState(false)
   const titleRef = useRef(null)
 
   const [darkMode, setDarkMode] = useState(false)
@@ -65,8 +64,8 @@ const Clientes: React.FC = () => {
     setClientes(clientesLista)
   }
 
-  const visualizarLista = uid => {
-    history.push(`/visualizar-lista/${uid}`)
+  const visualizarCliente = uid => {
+    history.push(`/visualizar-cliente/${uid}`)
   }
 
   const deletarCliente = uid => {
@@ -77,6 +76,22 @@ const Clientes: React.FC = () => {
     getDadosFirebase()
     clientes
   }, [])
+
+  useEffect(() => {
+    setContemNovosClientes(true)
+  }, [modalShow])
+
+  useMemo(() => {
+    database.ref('clientes').on('child_added', data => {
+      clientesLista.push({
+        uid: data.key,
+        nome: data.val().clienteNome,
+        email: data.val().clienteEmail,
+        telefone: data.val().clienteTelefone
+      })
+      setClientes(clientesLista)
+    })
+  }, [contemNovosClientes])
 
   return (
     <App>
@@ -129,7 +144,7 @@ const Clientes: React.FC = () => {
                       <ButtonB
                         variant="primary"
                         size="lg"
-                        // onClick={() => visualizarLista(dados.uid)}
+                        onClick={() => visualizarCliente(dados.uid)}
                       >
                         Visualizar
                       </ButtonB>{' '}
