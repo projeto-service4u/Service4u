@@ -48,5 +48,10 @@ export const useStyles = makeStyles({
   skeleton: {
     width: '100%',
     height: '50%'
+  },
+  tabela: {
+    width: '100%',
+    fontFamily: 'Poppins',
+    fontSize: '14px'
   }
 })
