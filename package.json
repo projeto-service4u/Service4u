@@ -43,7 +43,7 @@
     "unform-material-ui": "1.0.5",
     "use-async-effect": "^2.2.3",
     "web-vitals": "1.0.1",
-    "yarn": "^1.22.11",
+    "yarn": "^1.22.17",
     "yup": "0.32.9"
   },
   "scripts": {

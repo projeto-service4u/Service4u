@@ -5,6 +5,7 @@ import { blue } from '@material-ui/core/colors'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 
 import Clientes from '../pages/clientes/cadastro-listagem/index'
+import { VisualizarCLiente } from '../pages/clientes/visualizar-cliente'
 import ListasPadrao from '../pages/listas/lista-padrao'
 import NovaListaPadrao from '../pages/listas/nova-lista-padrao'
 import VisualizarLista from '../pages/listas/visualizar-lista'
@@ -35,6 +36,11 @@ const RotasInternas: React.FC = () => {
               path="/visualizar-lista/:uid"
               exact
               component={VisualizarLista}
+            />
+            <Route
+              path="/visualizar-cliente/:uid"
+              exact
+              component={VisualizarCLiente}
             />
             <Redirect path="*" to="/" />
 
