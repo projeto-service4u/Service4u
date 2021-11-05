@@ -86,9 +86,6 @@ const NovaListaPadrao: React.FC = () => {
       }
     ])
   }
-  useEffect(() => {
-    console.log(produtoLista)
-  }, [produtoLista])
 
   const criarLista = () => {
     try {
@@ -102,7 +99,6 @@ const NovaListaPadrao: React.FC = () => {
       setProdutoLista([])
       setTitle('')
       setQuantidade('')
-      console.log(lista)
     } catch (e) {
       toast.error('Erro ao adicionar lista, tente novamente!', {
         theme: 'colored'

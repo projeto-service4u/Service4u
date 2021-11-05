@@ -23,8 +23,6 @@ export const ModalProdutos: React.FC<any> = props => {
       produto: '',
       medida: ''
     })
-
-    console.log()
   }, [])
 
   const formik = useFormik({
