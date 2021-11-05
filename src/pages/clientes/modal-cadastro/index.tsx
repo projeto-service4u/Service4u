@@ -32,12 +32,13 @@ const ModalCadastro: React.FC<any> = props => {
     initialValues: initialValues,
     validationSchema: formCadastroClienteSchema,
     onSubmit: (values, { resetForm }) => {
-      // const produtosRef = database.ref('/produtos')
-      // produtosRef.push({
-      //   produtoNome: values.produto,
-      //   produtoMedida: values.medida
-      // })
-      toast.success('Produto adicionado com sucesso', {
+      const clientesRef = database.ref('/clientes')
+      clientesRef.push({
+        clienteNome: values.nome,
+        clienteEmail: values.email,
+        clienteTelefone: values.telefone
+      })
+      toast.success('Cliente criado com sucesso', {
         icon: '🚀',
         theme: 'colored'
       })

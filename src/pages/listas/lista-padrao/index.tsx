@@ -67,9 +67,9 @@ const ListasPadrao: React.FC = () => {
   useEffect(() => {
     getDadosFirebase()
   }, [])
-  useEffect(() => {
-    getDadosFirebase()
-  }, [deletarLista])
+  // useEffect(() => {
+  //   getDadosFirebase()
+  // }, [deletarLista])
 
   return (
     <App>
