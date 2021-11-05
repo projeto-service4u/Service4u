@@ -30,7 +30,7 @@ const Clientes: React.FC = () => {
   const [modalShow, setModalShow] = useState(false)
   const [loading, setLoading] = useState(true)
   const [clientes, setClientes] = useState<Cliente[]>([])
-  const [contemNovosProdutos, setContemNovosProdutos] = useState<boolean>()
+  const [contemNovosProdutos, setContemNovosProdutos] = useState()
   const titleRef = useRef(null)
 
   const [darkMode, setDarkMode] = useState(false)
@@ -44,7 +44,6 @@ const Clientes: React.FC = () => {
 
       .then(snapshot => {
         if (snapshot.exists()) {
-          console.log(snapshot.val())
           snapshot.forEach(childSnapshot => {
             const key = childSnapshot.key
             const data = childSnapshot.val()
@@ -64,11 +63,6 @@ const Clientes: React.FC = () => {
         console.error(error)
       })
     setClientes(clientesLista)
-    console.log(
-      '🚀 ~ file: index.tsx ~ line 53 ~ getDadosFirebase ~ listaPadrao',
-      clientesLista
-    )
-    console.log('primeiro')
   }
 
   const visualizarLista = uid => {
@@ -77,22 +71,13 @@ const Clientes: React.FC = () => {
 
   const deletarCliente = uid => {
     database.ref(`clientes/${uid}`).remove()
-    setContemNovosProdutos(prev => !prev)
+    setClientes([...clientes].filter(cliente => cliente.uid !== uid))
   }
   useEffect(() => {
     getDadosFirebase()
-    return () => getDadosFirebase()
+    clientes
   }, [])
-  // // useEffect(() => {
-  // //   getDadosFirebase()
-  // //   console.log('primeiro')
-  // // }, [contemNovosProdutos])
 
-  useEffect(() => {
-    getDadosFirebase()
-    console.log('segundo')
-  }, [contemNovosProdutos])
-  // const handleClick = () => setTitle(titleRef?.current?.value)
   return (
     <App>
       <P.Container>

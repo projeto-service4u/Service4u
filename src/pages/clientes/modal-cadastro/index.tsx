@@ -24,8 +24,6 @@ const ModalCadastro: React.FC<any> = props => {
       email: '',
       telefone: ''
     })
-
-    console.log()
   }, [])
 
   const formik = useFormik({

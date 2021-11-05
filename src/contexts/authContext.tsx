@@ -73,9 +73,6 @@ export function AuthProvider(props: AuthContextProviderProps) {
 
         // ..
       })
-    console.log('USER', user)
-
-    console.log(result)
   }
 
   async function Logout() {

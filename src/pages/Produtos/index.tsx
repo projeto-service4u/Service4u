@@ -52,7 +52,6 @@ const Produtos: React.FC = () => {
         console.error(error)
       })
     setProdutos(produtosLista)
-    console.log(produtos.length / 2)
   }
 
   useEffect(() => {
