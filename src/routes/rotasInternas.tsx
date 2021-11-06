@@ -32,6 +32,7 @@ const RotasInternas: React.FC = () => {
               exact
               component={NovaListaPadrao}
             />
+            <Route path="/nova-lista/:uid" exact component={NovaListaPadrao} />
             <Route
               path="/visualizar-lista/:uid"
               exact
