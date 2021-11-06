@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react'
 import { FormControl, InputGroup } from 'react-bootstrap'
+import { Table } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import { useHistory, useParams } from 'react-router'
 import { ToastContainer, toast } from 'react-toastify'
 
 import * as M from '@material-ui/core'
+import Paper from '@material-ui/core/Paper'
+import Skeleton from '@material-ui/lab/Skeleton'
 
 import { database, firebase } from '../../../services/firebase'
+import { ListaPadrao } from '../../listas/nova-lista-padrao/tipos'
 import { Cliente } from '../tipos'
 import App from './../../../container/App'
 import * as P from './styles'
@@ -20,30 +24,45 @@ export const VisualizarCLiente: React.FC = () => {
   const params = useParams<clienteParams>()
   const history = useHistory()
   const clienteId = params.uid
+  const [lista, setLista] = useState([])
+
   const [cliente, setCliente] = useState<Cliente>({} as Cliente)
   const [loading, setLoading] = useState(true)
+  const listaPadrao = []
 
   // const cliente = {}
 
   const voltar = () => {
     history.goBack()
   }
+  const novaLista = uid => {
+    history.push(`/nova-lista/${uid}`)
+  }
 
-  const getCliente = async () => {
-    const clienteRef = await database
+  const getCliente = () => {
+    const clienteRef = database
       .ref(`clientes/${clienteId}`)
       .once('value')
       .then(snapshot => {
         if (snapshot.exists()) {
           snapshot.val()
+          snapshot.child('listaServicos').forEach(snapshot => {
+            listaPadrao.push({
+              uid: snapshot.key,
+              nome: snapshot.val().nome,
+              produtos: snapshot.val().produtos
+            })
+          })
           setCliente({
             ...cliente,
             uid: snapshot.key,
             nome: snapshot.val().clienteNome,
             email: snapshot.val().clienteEmail,
-            telefone: snapshot.val().clienteTelefone
+            telefone: snapshot.val().clienteTelefone,
+            listaServicos: listaPadrao
           })
-          console.log(cliente)
+
+          console.log('aqui', cliente.listaServicos)
         } else {
           console.log('No data available')
         }
@@ -52,17 +71,24 @@ export const VisualizarCLiente: React.FC = () => {
       .catch(error => {
         console.error(error)
       })
-
-    console.log(cliente)
   }
 
   useEffect(() => {
     getCliente()
   }, [])
 
+  const visualizarLista = uid => {
+    history.push(`/visualizar-lista/${uid}`)
+  }
+
+  const deletarLista = uid => {
+    database.ref(`listaPadrao/${uid}`).remove()
+    setLista(lista.filter(lista => lista.uid !== uid))
+  }
   // useEffect(() => {
-  //   console.log('🚀 ~ file: index.tsx ~ line 42 ~ useEffect ~ cliente', cliente)
-  // }, [cliente])
+
+  //   // console.log('teste', obj)
+  // }, [lista])
 
   return (
     <App>
@@ -83,6 +109,7 @@ export const VisualizarCLiente: React.FC = () => {
               variant="contained"
               color="primary"
               className={classes.root}
+              onClick={() => novaLista(clienteId)}
             >
               Nova Lista
             </M.Button>
@@ -116,17 +143,59 @@ export const VisualizarCLiente: React.FC = () => {
               <FormControl aria-label="Telefone" value={cliente?.telefone} />
             </InputGroup>
           </P.DivProdutos>
-          <P.DivProdutosBotao>
+          {/* <P.DivProdutosBotao>
             <Button variant="primary" size="lg">
               Salvar Edição
             </Button>
-          </P.DivProdutosBotao>
+          </P.DivProdutosBotao> */}
         </P.ContainerProdutos>
         <P.ContainerTabela>
-          {/* <Tabela
-            dados={produtoLista}
-            cabecalho={['Nome', 'Quantidade', 'Unidade - Medida']}
-          /> */}
+          <Paper className={classes.tabela}>
+            {loading ? (
+              <div>
+                <Skeleton style={{ height: 100, width: '100%' }} />
+                <Skeleton style={{ height: 100, width: '100%' }} />
+              </div>
+            ) : (
+              <Table
+                striped={true}
+                bordered={true}
+                borderless={true}
+                hover={true}
+                responsive="sm"
+              >
+                <thead>
+                  <tr>
+                    <th className="th-nome">Nome</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {cliente.listaServicos.map((dados, key) => (
+                    <tr key={key}>
+                      <td key={key}> {dados.nome} </td>
+                      <td key={key + 1}>
+                        <Button
+                          variant="primary"
+                          size="lg"
+                          // onClick={() => visualizarLista(dados.uid)}
+                        >
+                          Visualizar
+                        </Button>{' '}
+                        <Button
+                          variant="danger"
+                          size="lg"
+                          // onClick={() => deletarLista(dados.uid)}
+                        >
+                          Excluir
+                        </Button>{' '}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            )}
+          </Paper>
         </P.ContainerTabela>
       </P.Container>
     </App>
