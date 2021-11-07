@@ -24,7 +24,7 @@ export const VisualizarCLiente: React.FC = () => {
   const params = useParams<clienteParams>()
   const history = useHistory()
   const clienteId = params.uid
-  const [lista, setLista] = useState([])
+  const [lista, setLista] = useState<ListaPadrao[]>([undefined])
 
   const [cliente, setCliente] = useState<Cliente>({} as Cliente)
   const [loading, setLoading] = useState(true)
@@ -49,6 +49,7 @@ export const VisualizarCLiente: React.FC = () => {
           snapshot.child('listaServicos').forEach(snapshot => {
             listaPadrao.push({
               uid: snapshot.key,
+              date: snapshot.val().date,
               nome: snapshot.val().nome,
               produtos: snapshot.val().produtos
             })
@@ -61,8 +62,7 @@ export const VisualizarCLiente: React.FC = () => {
             telefone: snapshot.val().clienteTelefone,
             listaServicos: listaPadrao
           })
-
-          console.log('aqui', cliente.listaServicos)
+          setLista(listaPadrao)
         } else {
           console.log('No data available')
         }
@@ -82,7 +82,7 @@ export const VisualizarCLiente: React.FC = () => {
   }
 
   const deletarLista = uid => {
-    database.ref(`listaPadrao/${uid}`).remove()
+    database.ref(`clientes/${clienteId}/listaServicos/${uid}`).remove()
     setLista(lista.filter(lista => lista.uid !== uid))
   }
   // useEffect(() => {
@@ -167,25 +167,27 @@ export const VisualizarCLiente: React.FC = () => {
                 <thead>
                   <tr>
                     <th className="th-nome">Nome</th>
+                    <th className="th-data">Data</th>
                     <th>Ações</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {cliente.listaServicos.map((dados, key) => (
+                  {lista.map((dados, key) => (
                     <tr key={key}>
                       <td key={key}> {dados.nome} </td>
+                      <td key={key + 2}> {dados.date} </td>
                       <td key={key + 1}>
                         <Button
                           variant="primary"
                           size="lg"
-                          // onClick={() => visualizarLista(dados.uid)}
+                          onClick={() => visualizarLista(dados.uid)}
                         >
                           Visualizar
                         </Button>{' '}
                         <Button
                           variant="danger"
                           size="lg"
-                          // onClick={() => deletarLista(dados.uid)}
+                          onClick={() => deletarLista(dados.uid)}
                         >
                           Excluir
                         </Button>{' '}
