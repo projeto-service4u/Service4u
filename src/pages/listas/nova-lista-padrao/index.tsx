@@ -130,7 +130,12 @@ const NovaListaPadrao: React.FC = () => {
 
   const criarLista = () => {
     if (clienteId) {
+      const date = new Date()
+      const data = date.toLocaleDateString('pt-BR')
+
+      console.log('aqui', date.toLocaleDateString('pt-BR'))
       const listaPadrao: ListaPadrao = {
+        date: data,
         nome: title,
         produtos: produtoLista
       }
@@ -139,6 +144,10 @@ const NovaListaPadrao: React.FC = () => {
         .push(listaPadrao)
         .then(() => {
           toast.success('Lista criada com sucesso!')
+          setLista([])
+          setProdutoLista([])
+          setTitle('')
+          setQuantidade('')
         })
         .catch(error => {
           toast.error('Erro ao criar lista!')

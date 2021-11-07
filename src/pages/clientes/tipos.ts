@@ -5,6 +5,6 @@ export interface Cliente {
   nome: string
   email: string
   telefone: string
-  dataUltimaLista?: Date
+  dataUltimaLista?: string
   listaServicos?: ListaPadrao[]
 }
