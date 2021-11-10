@@ -39,6 +39,11 @@ const RotasInternas: React.FC = () => {
               component={VisualizarLista}
             />
             <Route
+              path="/visualizar-lista-cliente/:uidCliente/:uid"
+              exact
+              component={VisualizarLista}
+            />
+            <Route
               path="/visualizar-cliente/:uid"
               exact
               component={VisualizarCLiente}
