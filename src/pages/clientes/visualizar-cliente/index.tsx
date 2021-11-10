@@ -77,13 +77,19 @@ export const VisualizarCLiente: React.FC = () => {
     getCliente()
   }, [])
 
-  const visualizarLista = uid => {
-    history.push(`/visualizar-lista/${uid}`)
+  const visualizarLista = (uidCliente, uid) => {
+    history.push(`/visualizar-lista-cliente/${uidCliente}/${uid}`)
   }
 
   const deletarLista = uid => {
-    database.ref(`clientes/${clienteId}/listaServicos/${uid}`).remove()
-    setLista(lista.filter(lista => lista.uid !== uid))
+    try {
+      database.ref(`clientes/${clienteId}/listaServicos/${uid}`).remove()
+      setLista(lista.filter(lista => lista.uid !== uid))
+
+      toast.success('Lista deletada com sucesso!')
+    } catch (error) {
+      toast.error('Erro ao deletar lista!')
+    }
   }
   // useEffect(() => {
 
@@ -180,7 +186,9 @@ export const VisualizarCLiente: React.FC = () => {
                         <Button
                           variant="primary"
                           size="lg"
-                          onClick={() => visualizarLista(dados.uid)}
+                          onClick={() =>
+                            visualizarLista(cliente.uid, dados.uid)
+                          }
                         >
                           Visualizar
                         </Button>{' '}

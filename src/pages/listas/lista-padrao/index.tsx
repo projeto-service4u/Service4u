@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import { useHistory } from 'react-router'
+import { ToastContainer, toast } from 'react-toastify'
 
 import * as M from '@material-ui/core'
 import Paper from '@material-ui/core/Paper'
@@ -57,16 +58,26 @@ const ListasPadrao: React.FC = () => {
   }
 
   const deletarLista = uid => {
-    database.ref(`listaPadrao/${uid}`).remove()
-    setLista(lista.filter(lista => lista.uid !== uid))
+    try {
+      database.ref(`listaPadrao/${uid}`).remove()
+      setLista([...lista.filter(lista => lista.uid !== uid)])
+      toast.success('Lista deletada com sucesso!')
+    } catch (error) {
+      toast.error('Erro ao deletar lista')
+    }
   }
 
   useEffect(() => {
     getDadosFirebase()
   }, [])
+  useEffect(() => {
+    getDadosFirebase()
+  }, [lista])
 
   return (
     <App>
+      <ToastContainer />
+
       <P.Container>
         <P.ContainerAcoes>
           <P.Titulo>Lista Padrão</P.Titulo>
