@@ -33,4 +33,4 @@ Scenario: Login com sucesso
     When acesso o site
     And preencho meu email e senha
     Then devo realizar meu login com sucesso
-    And visualizar a página principal com o texto "About"
+    And visualizar a página principal com o texto "Clientes"

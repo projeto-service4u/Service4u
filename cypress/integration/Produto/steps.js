@@ -20,11 +20,11 @@ And(/^o botão Adicionar Item$/, () => {
 
 And(/^visualizar as colunas "([^"]*)" e "([^"]*)"$/, (Nome, args2) => {
   cy.get('thead > tr > :nth-child(1)').should('contain', Nome)
-  cy.get('thead > tr > :nth-child(2)').should('contain', 'Unidade/Medida')
+  cy.get('thead > tr > :nth-child(2)').should('contain', 'Unidade - Medida')
 })
 
 And(/^a listagem de itens já cadastrados ou não$/, () => {
-  cy.get('.sc-fubCzh > .MuiPaper-root').should('be.visible')
+  cy.get('.MuiPaper-root').should('be.visible')
 })
 
 When(/^acesso a tela de Produtos$/, () => {
@@ -76,6 +76,6 @@ Then(
 
 And(/^visualizar na listagem após fechar o modal$/, () => {
   cy.get('.modal-footer > .btn').click()
-  cy.get('.sc-fubCzh > .MuiPaper-root').should('contain', 'Tinta Fosca Preta')
-  cy.get('.sc-fubCzh > .MuiPaper-root').should('contain', '10 Litros')
+  cy.get('.MuiPaper-root').should('contain', 'Tinta Fosca Preta')
+  cy.get('.MuiPaper-root').should('contain', '10 Litros')
 })
