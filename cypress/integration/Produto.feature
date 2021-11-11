@@ -3,7 +3,7 @@ Feature: Produto
     Como usuário logado, desejo acessar o menu Produto
     Para visualizar os produtos cadastros e adicionar novos itens
 
-Scenario: Validacoes gerais da tela de Login
+Scenario: Validacoes gerais da tela de Produto
     Given que sou um prestador cadastrado
     When efetuo login com sucesso
     And clico no menu Produto
