@@ -92,8 +92,6 @@ Then(
 
 Then(/^o cliente em questão deve ser excluído e removido da listagem$/, () => {
   cy.contains('matheus@teste.com').should('not.exist')
-  cy.get('.logout').click({ force: true })
-  cy.wait(6000)
 })
 Then(
   /^clico no botão Visualizar na coluna Ações de determinado cliente$/,
