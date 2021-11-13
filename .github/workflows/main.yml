@@ -10,9 +10,9 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          # install-command: yarn install --frozen-lockfile
-          # start: yarn start
-          wait-on: https://s4u.netlify.app/
+          install-command: yarn install --frozen-lockfile
+          start: yarn start
+          wait-on: http://localhost:3000
           record: true
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
