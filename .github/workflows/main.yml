@@ -18,7 +18,6 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
       - name: Gerar relatorio
         run: cd cypress && node report.js
-          echo $CYPRESS_RECORD_KEY
       - name: Fazer upload do relatorio
         uses: actions/upload-artifact@v2
         with:
