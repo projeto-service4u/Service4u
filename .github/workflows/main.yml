@@ -1,0 +1,25 @@
+name: End-to-end tests
+on: [push]
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          build: yarn run build
+          start: yarn start
+          wait-on: http://localhost:3000
+          record: true
+        env:
+          CYPRESS_RECORD_KEY: ${{ process.env.CYPRESS_RECORD_KEY }}
+      - name: Gerar relatorio
+        run: cd cypress && node report.js
+      - name: Fazer upload do relatorio
+        uses: actions/upload-artifact@v2
+        with:
+          name: cypress-cucumber-report
+          path: cypress/cucumber-report/
