@@ -57,14 +57,10 @@ const Produtos: React.FC = () => {
   useEffect(() => {
     getDadosFirebase()
 
-    return () => getDadosFirebase()
+    // return () => getDadosFirebase()
   }, [])
 
-  useEffect(() => {
-    setContemNovosProdutos(true)
-  }, [modalShow])
-
-  useEffect(() => {
+  const novoProduto = () => {
     database.ref('produtos').on('child_added', data => {
       produtosLista.push({
         uid: data.key,
@@ -73,7 +69,8 @@ const Produtos: React.FC = () => {
       })
       setProdutos(produtosLista)
     })
-  }, [contemNovosProdutos])
+    console.log('Novo produto', produtos)
+  }
 
   return (
     <App>
@@ -105,7 +102,11 @@ const Produtos: React.FC = () => {
           />
         )}
       </P.Container>
-      <ModalProdutos show={modalShow} onHide={() => setModalShow(false)} />
+      <ModalProdutos
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        onExit={() => novoProduto()}
+      />
     </App>
   )
 }
