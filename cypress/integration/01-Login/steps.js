@@ -29,8 +29,8 @@ Then(/^devo realizar meu login com sucesso$/, () => {
   return true
 })
 
-And(/^visualizar a página principal com o texto "([^"]*)"$/, About => {
-  cy.contains(About)
+And(/^visualizar a página principal com o texto "([^"]*)"$/, Clientes => {
+  cy.contains(Clientes)
 })
 
 And(/^preencho apenas a senha$/, () => {

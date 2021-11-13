@@ -48,10 +48,6 @@ const VisualizarLista: React.FC = () => {
       .catch(error => {
         console.error(error)
       })
-    console.log(
-      '🚀 ~ file: index.tsx ~ line 53 ~ getDadosFirebase ~ lista',
-      lista
-    )
   }
 
   useEffect(() => {

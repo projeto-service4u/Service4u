@@ -5,8 +5,11 @@
 /.pnp
 .pnp.js
 
+
 # testing
 /coverage
+cypress/cucumber-json/*
+cypress/cucumber-report/*
 
 # production
 /build

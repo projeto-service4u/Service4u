@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import { FormControl, InputGroup } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
-import { useHistory } from 'react-router'
+import { useHistory, useParams } from 'react-router'
 import Select from 'react-select'
 import { ToastContainer, toast } from 'react-toastify'
 
 import * as M from '@material-ui/core'
 
 import { database, firebase } from '../../../services/firebase'
-import { ListaProdutos } from '../../Produtos/tipos'
+import { Cliente } from '../../clientes/tipos'
+import { ListaProdutos } from '../../produtos/tipos'
 import Tabela from './../../../components/Tabela/index'
 import App from './../../../container/App'
 import * as P from './styles'
 import { useStyles } from './styles'
 import { ListaPadrao } from './tipos'
+
+type clienteParams = {
+  uid: string
+}
 
 const NovaListaPadrao: React.FC = () => {
   const classes = useStyles()
@@ -30,7 +35,40 @@ const NovaListaPadrao: React.FC = () => {
   const produtosLista = []
   const [produtoLista, setProdutoLista] = useState<ListaProdutos[]>([])
   const listagemProdutos = []
+  const [cliente, setCliente] = useState<Cliente>({} as Cliente)
+
+  const params = useParams<clienteParams>()
+
+  const clienteId = params.uid
+
   const history = useHistory()
+
+  const getCliente = async () => {
+    const clienteRef = await database
+      .ref(`clientes/${clienteId}`)
+      .once('value')
+      .then(snapshot => {
+        if (snapshot.exists()) {
+          snapshot.val()
+          setCliente({
+            ...cliente,
+            uid: snapshot.key,
+            nome: snapshot.val().clienteNome,
+            email: snapshot.val().clienteEmail,
+            telefone: snapshot.val().clienteTelefone
+          })
+          console.log(cliente)
+        } else {
+          console.log('No data available')
+        }
+        setLoading(false)
+      })
+      .catch(error => {
+        console.error(error)
+      })
+
+    console.log(cliente)
+  }
 
   const getDadosFirebase = () => {
     database
@@ -64,6 +102,9 @@ const NovaListaPadrao: React.FC = () => {
   }
 
   useEffect(() => {
+    if (clienteId) {
+      getCliente()
+    }
     getDadosFirebase()
   }, [])
 
@@ -86,27 +127,49 @@ const NovaListaPadrao: React.FC = () => {
       }
     ])
   }
-  useEffect(() => {
-    console.log(produtoLista)
-  }, [produtoLista])
 
   const criarLista = () => {
-    try {
-      const listaRef = database.ref('listaPadrao')
-      listaRef.push({ nome: title, produtos: produtoLista })
-      toast.success('Lista adicionada com sucesso', {
-        icon: '🚀',
-        theme: 'colored'
-      })
-      setLista([])
-      setProdutoLista([])
-      setTitle('')
-      setQuantidade('')
-      console.log(lista)
-    } catch (e) {
-      toast.error('Erro ao adicionar lista, tente novamente!', {
-        theme: 'colored'
-      })
+    if (clienteId) {
+      const date = new Date()
+      const data = date.toLocaleDateString('pt-BR')
+
+      console.log('aqui', date.toLocaleDateString('pt-BR'))
+      const listaPadrao: ListaPadrao = {
+        date: data,
+        nome: title,
+        produtos: produtoLista
+      }
+      database
+        .ref(`clientes/${clienteId}/listaServicos`)
+        .push(listaPadrao)
+        .then(() => {
+          toast.success('Lista criada com sucesso!')
+          setLista([])
+          setProdutoLista([])
+          setTitle('')
+          setQuantidade('')
+        })
+        .catch(error => {
+          toast.error('Erro ao criar lista!')
+          console.error(error)
+        })
+    } else {
+      try {
+        const listaRef = database.ref('listaPadrao')
+        listaRef.push({ nome: title, produtos: produtoLista })
+        toast.success('Lista adicionada com sucesso', {
+          icon: '🚀',
+          theme: 'colored'
+        })
+        setLista([])
+        setProdutoLista([])
+        setTitle('')
+        setQuantidade('')
+      } catch (e) {
+        toast.error('Erro ao adicionar lista, tente novamente!', {
+          theme: 'colored'
+        })
+      }
     }
   }
 

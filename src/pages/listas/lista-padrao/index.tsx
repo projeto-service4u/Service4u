@@ -50,10 +50,6 @@ const ListasPadrao: React.FC = () => {
         console.error(error)
       })
     await setLista(listaPadrao)
-    console.log(
-      '🚀 ~ file: index.tsx ~ line 53 ~ getDadosFirebase ~ listaPadrao',
-      listaPadrao
-    )
   }
 
   const visualizarLista = uid => {
@@ -62,14 +58,12 @@ const ListasPadrao: React.FC = () => {
 
   const deletarLista = uid => {
     database.ref(`listaPadrao/${uid}`).remove()
+    setLista(lista.filter(lista => lista.uid !== uid))
   }
 
   useEffect(() => {
     getDadosFirebase()
   }, [])
-  useEffect(() => {
-    getDadosFirebase()
-  }, [deletarLista])
 
   return (
     <App>
