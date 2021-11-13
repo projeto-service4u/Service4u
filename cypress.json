@@ -1,6 +1,7 @@
 {
-    "testFiles": "**/*.feature",
-    "baseUrl": "http://localhost:3000/",
-    "video": false,
-    "projectId": "tg4q3u"
+  "testFiles": "**/*.feature",
+  "baseUrl": "http://localhost:3000/",
+  "video": false,
+  "projectId": "tg4q3u",
+  "screenshotOnRunFailure": false
 }
