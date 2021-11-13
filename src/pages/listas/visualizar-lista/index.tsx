@@ -14,6 +14,7 @@ import * as P from './styles'
 import { useStyles } from './styles'
 
 type ListaParams = {
+  uidCliente?: string
   uid: string
 }
 
@@ -27,27 +28,50 @@ const VisualizarLista: React.FC = () => {
   const listaPadrao = []
 
   const listaId = params.uid
+  const clienteUid = params.uidCliente
 
   const getDadosFirebase = async () => {
-    await database
-      .ref(`listaPadrao/${listaId}`)
-      .once('value')
+    if (clienteUid) {
+      await database
+        .ref(`clientes/${clienteUid}/listaServicos/${listaId}`)
+        .once('value')
 
-      .then(snapshot => {
-        if (snapshot.exists()) {
-          snapshot
-          const key = snapshot.key
-          const data = snapshot.val()
+        .then(snapshot => {
+          if (snapshot.exists()) {
+            snapshot
+            const key = snapshot.key
+            const data = snapshot.val()
 
-          setLista(data)
-        } else {
-          console.log('No data available')
-        }
-        setLoading(false)
-      })
-      .catch(error => {
-        console.error(error)
-      })
+            setLista(data)
+          } else {
+            console.log('No data available')
+          }
+          setLoading(false)
+        })
+        .catch(error => {
+          console.error(error)
+        })
+    } else {
+      await database
+        .ref(`listaPadrao/${listaId}`)
+        .once('value')
+
+        .then(snapshot => {
+          if (snapshot.exists()) {
+            snapshot
+            const key = snapshot.key
+            const data = snapshot.val()
+
+            setLista(data)
+          } else {
+            console.log('No data available')
+          }
+          setLoading(false)
+        })
+        .catch(error => {
+          console.error(error)
+        })
+    }
   }
 
   useEffect(() => {

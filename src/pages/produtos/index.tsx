@@ -51,20 +51,16 @@ const Produtos: React.FC = () => {
       .catch(error => {
         console.error(error)
       })
-    setProdutos(produtosLista)
+    setProdutos(produtos => produtosLista)
   }
 
   useEffect(() => {
     getDadosFirebase()
 
-    return () => getDadosFirebase()
+    // return () => getDadosFirebase()
   }, [])
 
-  useEffect(() => {
-    setContemNovosProdutos(true)
-  }, [modalShow])
-
-  useMemo(() => {
+  const novoProduto = () => {
     database.ref('produtos').on('child_added', data => {
       produtosLista.push({
         uid: data.key,
@@ -73,7 +69,8 @@ const Produtos: React.FC = () => {
       })
       setProdutos(produtosLista)
     })
-  }, [contemNovosProdutos])
+    console.log('Novo produto', produtos)
+  }
 
   return (
     <App>
@@ -99,10 +96,17 @@ const Produtos: React.FC = () => {
             <Skeleton style={{ height: 100, width: '100%' }} />
           </div>
         ) : (
-          <Tabela dados={produtos} cabecalho={['Nome', 'Unidade - Medida']} />
+          <Tabela
+            dados={produtos}
+            cabecalho={['Nome', 'Unidade - Medida', 'Ações']}
+          />
         )}
       </P.Container>
-      <ModalProdutos show={modalShow} onHide={() => setModalShow(false)} />
+      <ModalProdutos
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        onExit={() => novoProduto()}
+      />
     </App>
   )
 }

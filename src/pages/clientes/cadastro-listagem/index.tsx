@@ -9,6 +9,7 @@ import React, {
 import { Table } from 'react-bootstrap'
 import ButtonB from 'react-bootstrap/Button'
 import { useHistory } from 'react-router'
+import { ToastContainer, toast } from 'react-toastify'
 
 import { Button, makeStyles } from '@material-ui/core'
 import Paper from '@material-ui/core/Paper'
@@ -30,10 +31,6 @@ const Clientes: React.FC = () => {
   const [loading, setLoading] = useState(true)
   const [clientes, setClientes] = useState<Cliente[]>([])
   const [contemNovosClientes, setContemNovosClientes] = useState(false)
-  const titleRef = useRef(null)
-
-  const [darkMode, setDarkMode] = useState(false)
-
   const clientesLista = []
 
   const getDadosFirebase = () => {
@@ -69,19 +66,21 @@ const Clientes: React.FC = () => {
   }
 
   const deletarCliente = uid => {
-    database.ref(`clientes/${uid}`).remove()
-    setClientes([...clientes].filter(cliente => cliente.uid !== uid))
+    try {
+      database.ref(`clientes/${uid}`).remove()
+      setClientes([
+        ...clientes.filter(cliente => cliente.uid !== uid)
+      ] as Cliente[])
+      toast.success('Cliente deletado com sucesso!')
+    } catch (error) {
+      toast.error('Erro ao deletar cliente!')
+    }
   }
   useEffect(() => {
     getDadosFirebase()
-    clientes
   }, [])
 
-  useEffect(() => {
-    setContemNovosClientes(true)
-  }, [modalShow])
-
-  useMemo(() => {
+  const novoCliente = () => {
     database.ref('clientes').on('child_added', data => {
       clientesLista.push({
         uid: data.key,
@@ -91,10 +90,11 @@ const Clientes: React.FC = () => {
       })
       setClientes(clientesLista)
     })
-  }, [contemNovosClientes])
+  }
 
   return (
     <App>
+      <ToastContainer />
       <P.Container>
         <P.ContainerAcoes>
           <P.Titulo>Clientes</P.Titulo>
@@ -163,7 +163,11 @@ const Clientes: React.FC = () => {
           )}
         </Paper>
       </P.Container>
-      <ModalCadastro show={modalShow} onHide={() => setModalShow(false)} />
+      <ModalCadastro
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        onExit={() => novoCliente()}
+      />
     </App>
   )
 }
