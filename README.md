@@ -1,5 +1,7 @@
 # Service4U
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3a3a430b-6a15-4f38-a9a5-fdf2e83dfbb0/deploy-status)](https://app.netlify.com/sites/s4u/deploys)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
