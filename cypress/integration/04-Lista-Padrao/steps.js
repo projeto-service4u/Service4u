@@ -42,14 +42,14 @@ When(
       'Nova Lista Padrão'
     )
     cy.get('.mySelect__value-container.css-319lph-ValueContainer').type(
-      '233{enter}'
+      'Tinta Branca{enter}'
     )
     cy.get('.sc-lmoMya > :nth-child(2) > .input-group > .form-control').type(
       '5'
     )
     cy.get('.btn').click()
     cy.get('.mySelect__value-container.css-319lph-ValueContainer').type(
-      '321321{enter}'
+      'Tinta Azul Brilhosa{enter}'
     )
     cy.get('.sc-lmoMya > :nth-child(2) > .input-group > .form-control')
       .clear()
@@ -93,12 +93,18 @@ Then(/^as colunas Nome, Quantidade, Unidade-Medida$/, () => {
 })
 
 Then(/^as informações de itens pertencentes à lista$/, () => {
-  cy.get('tbody > :nth-child(1) > :nth-child(1)').should('contain', '233')
+  cy.get('tbody > :nth-child(1) > :nth-child(1)').should(
+    'contain',
+    'Tinta Branca'
+  )
   cy.get('tbody > :nth-child(1) > :nth-child(2)').should('contain', '5')
-  cy.get('tbody > :nth-child(1) > :nth-child(3)').should('contain', '22222')
-  cy.get('tbody > :nth-child(2) > :nth-child(1)').should('contain', '321321')
+  cy.get('tbody > :nth-child(1) > :nth-child(3)').should('contain', '5 Litros')
+  cy.get('tbody > :nth-child(2) > :nth-child(1)').should(
+    'contain',
+    'Tinta Azul Brilhosa'
+  )
   cy.get('tbody > :nth-child(2) > :nth-child(2)').should('contain', '2')
-  cy.get('tbody > :nth-child(2) > :nth-child(3)').should('contain', '321321')
+  cy.get('tbody > :nth-child(2) > :nth-child(3)').should('contain', '10 Litros')
 })
 
 Then(

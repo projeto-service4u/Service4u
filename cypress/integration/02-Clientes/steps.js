@@ -187,14 +187,14 @@ And(
       'Lista Padrão Matheus'
     )
     cy.get('.mySelect__value-container.css-319lph-ValueContainer').type(
-      '233{enter}'
+      'Tinta Branca{enter}'
     )
     cy.get('.sc-lmoMya > :nth-child(2) > .input-group > .form-control').type(
       '5'
     )
     cy.get('.btn').click()
     cy.get('.mySelect__value-container.css-319lph-ValueContainer').type(
-      '321321{enter}'
+      'Tinta Azul Brilhosa{enter}'
     )
     cy.get('.sc-lmoMya > :nth-child(2) > .input-group > .form-control')
       .clear()
