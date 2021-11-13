@@ -5,7 +5,6 @@ import { ToastContainer, toast } from 'react-toastify'
 
 import { useFormik } from 'formik'
 
-import Botao from '../../../components/Botao/index'
 import { database, firebase } from '../../../services/firebase'
 import { formProdutoSchema } from './schema'
 import { Container } from './styles'

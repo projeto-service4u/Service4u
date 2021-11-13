@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap'
+import Button from 'react-bootstrap/Button'
+import { ToastContainer, toast } from 'react-toastify'
 
 import Paper from '@material-ui/core/Paper'
 import { makeStyles } from '@material-ui/core/styles'
 
+import { database, firebase } from '../../services/firebase'
+import { ListaProdutos } from './../../pages/produtos/tipos'
 import { Container } from './styles'
 import { Column, PropsTable } from './tipos'
 
@@ -16,9 +20,29 @@ const useStyles = makeStyles({
 })
 const Tabela: React.FC<PropsTable> = (props, ...rest) => {
   const classes = useStyles()
+  const [produtos, setProdutos] = useState<ListaProdutos[]>(props.dados)
+
+  const deletarProduto = uid => {
+    try {
+      database.ref(`produtos/${uid}`).remove()
+      setProdutos([
+        ...produtos.filter(produtos => produtos.uid !== uid)
+      ] as ListaProdutos[])
+      toast.success('Cliente deletado com sucesso!')
+    } catch (error) {
+      toast.error('Erro ao deletar cliente!')
+    }
+    console.log(uid)
+  }
+
+  useEffect(() => {
+    setProdutos(props.dados)
+  }, [props.dados])
 
   return (
     <Paper className={classes.root}>
+      <ToastContainer />
+
       <Table
         striped={true}
         bordered={true}
@@ -34,11 +58,20 @@ const Tabela: React.FC<PropsTable> = (props, ...rest) => {
           </tr>
         </thead>
         <tbody>
-          {props.dados.map((dados, id) => (
+          {produtos.map((dados, id) => (
             <tr key={id + 1}>
               <td key={id + 2}>{dados.nome}</td>
               {dados.quantidade && <td key={id + 3}>{dados.quantidade}</td>}
               <td key={id}>{dados.medida}</td>
+              <td key={id + 4}>
+                <Button
+                  variant="danger"
+                  size="lg"
+                  onClick={() => deletarProduto(dados.uid)}
+                >
+                  Excluir
+                </Button>
+              </td>
             </tr>
           ))}
         </tbody>
