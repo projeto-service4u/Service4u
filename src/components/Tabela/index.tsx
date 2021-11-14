@@ -28,9 +28,9 @@ const Tabela: React.FC<PropsTable> = (props, ...rest) => {
       setProdutos([
         ...produtos.filter(produtos => produtos.uid !== uid)
       ] as ListaProdutos[])
-      toast.success('Cliente deletado com sucesso!')
+      toast.success('Produto deletado com sucesso!')
     } catch (error) {
-      toast.error('Erro ao deletar cliente!')
+      toast.error('Erro ao deletar Produto!')
     }
     console.log(uid)
   }
@@ -63,15 +63,17 @@ const Tabela: React.FC<PropsTable> = (props, ...rest) => {
               <td key={id + 2}>{dados.nome}</td>
               {dados.quantidade && <td key={id + 3}>{dados.quantidade}</td>}
               <td key={id}>{dados.medida}</td>
-              <td key={id + 4}>
-                <Button
-                  variant="danger"
-                  size="lg"
-                  onClick={() => deletarProduto(dados.uid)}
-                >
-                  Excluir
-                </Button>
-              </td>
+              {props.acoes && (
+                <td key={id + 4}>
+                  <Button
+                    variant="danger"
+                    size="lg"
+                    onClick={() => deletarProduto(dados.uid)}
+                  >
+                    Excluir
+                  </Button>
+                </td>
+              )}
             </tr>
           ))}
         </tbody>

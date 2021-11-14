@@ -257,6 +257,7 @@ const NovaListaPadrao: React.FC = () => {
           <Tabela
             dados={produtoLista}
             cabecalho={['Nome', 'Quantidade', 'Unidade - Medida']}
+            acoes={false}
           />
         </P.ContainerTabela>
       </P.Container>

@@ -99,6 +99,7 @@ const Produtos: React.FC = () => {
           <Tabela
             dados={produtos}
             cabecalho={['Nome', 'Unidade - Medida', 'Ações']}
+            acoes={true}
           />
         )}
       </P.Container>

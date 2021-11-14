@@ -17,4 +17,5 @@ export interface Dados {
 export interface PropsTable {
   cabecalho: String[]
   dados?: any
+  acoes?: boolean
 }

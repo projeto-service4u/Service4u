@@ -127,6 +127,7 @@ const VisualizarLista: React.FC = () => {
                 <Tabela
                   dados={lista?.produtos}
                   cabecalho={['Nome', 'Quantidade', 'Unidade - Medida']}
+                  acoes={false}
                 />
               </Print>
             )}
