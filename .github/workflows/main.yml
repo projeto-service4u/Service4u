@@ -10,8 +10,6 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          install-command: yarn install --frozen-lockfile
-          start: yarn start
           wait-on: https://devs4u.netlify.app/
           record: true
         env:
