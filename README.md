@@ -1,6 +1,6 @@
 # Service4U
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/3a3a430b-6a15-4f38-a9a5-fdf2e83dfbb0/deploy-status)](https://app.netlify.com/sites/s4u/deploys) [![Tests](https://github.com/tccService4u/Service4u/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/tccService4u/Service4u/actions/workflows/main.yml)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3a3a430b-6a15-4f38-a9a5-fdf2e83dfbb0/deploy-status)](https://app.netlify.com/sites/s4u/deploys) [![Service4U](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/detailed/tg4q3u&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/tg4q3u/runs)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
