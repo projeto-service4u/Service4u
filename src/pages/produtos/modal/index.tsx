@@ -9,7 +9,7 @@ import { database, firebase } from '../../../services/firebase'
 import { formProdutoSchema } from './schema'
 import { Container } from './styles'
 
-export const ModalProdutos: React.FC<any> = props => {
+export const ModalProdutos: React.FC<any> = (props, ...rest) => {
   const initialValues = {
     produto: '',
     medida: ''
@@ -24,22 +24,46 @@ export const ModalProdutos: React.FC<any> = props => {
     })
   }, [])
 
+  useEffect(() => {
+    formik.setValues({
+      produto: props.dadosProduto?.nome,
+      medida: props.dadosProduto?.medida
+    })
+  }, [props.dadosProduto])
+
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: formProdutoSchema,
     onSubmit: (values, { resetForm }) => {
-      const produtosRef = database.ref('/produtos')
-      produtosRef.push({
-        produtoNome: values.produto,
-        produtoMedida: values.medida
-      })
-      toast.success('Produto adicionado com sucesso', {
-        icon: '🚀',
-        theme: 'colored'
-      })
-      resetForm()
+      if (props.editar) {
+        try {
+          database.ref(`produtos/${props.dadosProduto.uid}`).update({
+            produtoNome: values.produto,
+            produtoMedida: values.medida
+          })
+          produtoAlterado(true)
+          toast.success('Produto editado com sucesso!')
+        } catch (error) {
+          toast.error('Erro ao editar Produto!')
+        }
+      } else {
+        const produtosRef = database.ref('/produtos')
+        produtosRef.push({
+          produtoNome: values.produto,
+          produtoMedida: values.medida
+        })
+        toast.success('Produto adicionado com sucesso', {
+          icon: '🚀',
+          theme: 'colored'
+        })
+        resetForm()
+      }
     }
   })
+
+  const produtoAlterado = alterado => {
+    props.alterado(alterado)
+  }
 
   return (
     <Modal
