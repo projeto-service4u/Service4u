@@ -30,7 +30,6 @@ const Clientes: React.FC = () => {
   const [modalShow, setModalShow] = useState(false)
   const [loading, setLoading] = useState(true)
   const [clientes, setClientes] = useState<Cliente[]>([])
-  const [contemNovosClientes, setContemNovosClientes] = useState(false)
   const clientesLista = []
 
   const getDadosFirebase = () => {
@@ -88,7 +87,7 @@ const Clientes: React.FC = () => {
         email: data.val().clienteEmail,
         telefone: data.val().clienteTelefone
       })
-      setClientes(clientesLista)
+      setClientes([...clientesLista])
     })
   }
 
