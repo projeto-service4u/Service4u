@@ -86,22 +86,20 @@ const Tabela: React.FC<PropsTable> = (props, ...rest) => {
               {props.acoes && (
                 <td key={id + 4}>
                   <Button
-                    variant="danger"
-                    size="lg"
-                    onClick={() => deletarProduto(dados.uid)}
-                  >
-                    Excluir
-                  </Button>{' '}
-                  <Button
-                    // size="medium"
                     variant="primary"
                     size="lg"
-                    // startIcon={<AddCircleOutlineIcon />}
                     onClick={() =>
                       editarProduto(dados.uid, dados.nome, dados.medida)
                     }
                   >
                     Editar
+                  </Button>{' '}
+                  <Button
+                    variant="danger"
+                    size="lg"
+                    onClick={() => deletarProduto(dados.uid)}
+                  >
+                    Excluir
                   </Button>
                 </td>
               )}
