@@ -24,6 +24,7 @@
     "bootstrap": "5.1.0",
     "classnames": "2.3.1",
     "cypress-cucumber-attach-screenshots-to-failed-steps": "^1.0.0",
+    "emailjs-com": "^3.2.0",
     "firebase": "8.9.1",
     "formik": "2.2.9",
     "multiple-cucumber-html-reporter": "^1.18.0",

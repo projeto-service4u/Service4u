@@ -94,10 +94,10 @@ export const ModalProdutos: React.FC<any> = (props, ...rest) => {
                   />
                 </Col>
                 <Col>
-                  <Form.Label>Unidade/Medida</Form.Label>
+                  <Form.Label>Unidade - Medida</Form.Label>
                   <Form.Control
                     size="lg"
-                    placeholder="ex: Kg / Unidade / Litros"
+                    placeholder="ex: Kg - Unidade - Litros"
                     name="medida"
                     onChange={formik.handleChange}
                     value={formik.values.medida}
@@ -113,7 +113,7 @@ export const ModalProdutos: React.FC<any> = (props, ...rest) => {
                     type="submit"
                     disabled={!(formik.isValid && formik.dirty)}
                   >
-                    Enviar
+                    Salvar
                   </Button>
                 </Col>
               </Row>

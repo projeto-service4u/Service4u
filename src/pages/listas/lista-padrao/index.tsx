@@ -8,6 +8,7 @@ import * as M from '@material-ui/core'
 import Paper from '@material-ui/core/Paper'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import Skeleton from '@material-ui/lab/Skeleton'
+import emailjs from 'emailjs-com'
 
 import App from '../../../container/App'
 import { database, firebase } from '../../../services/firebase'
