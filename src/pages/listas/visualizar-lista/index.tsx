@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 
 import { Button, makeStyles } from '@material-ui/core'
 import Skeleton from '@material-ui/lab/Skeleton'
+import emailjs from 'emailjs-com'
 
 import { database, firebase } from '../../../services/firebase'
 import { ListaPadrao } from '../nova-lista-padrao/tipos'
@@ -78,6 +79,37 @@ const VisualizarLista: React.FC = () => {
     getDadosFirebase()
   }, [])
 
+  const envioEmail = () => {
+    console.log('enviar lista')
+
+    emailjs
+      .send(
+        '',
+        '',
+        {
+          email_cliente: '',
+          nome_user: '',
+          message: lista.produtos
+            .map(
+              produto =>
+                `${produto.nome} - ${produto.medida} - ${produto.quantidade} `
+            )
+            .join(
+              '&nbsp;&nbsp;&nbsp;          |              &nbsp;&nbsp;&nbsp;'
+            )
+        },
+        ''
+      )
+      .then(
+        function (response) {
+          console.log('SUCCESS!', response.status, response.text)
+        },
+        function (error) {
+          console.log('FAILED...', error)
+        }
+      )
+  }
+
   const handlePrint = () => {
     window.print()
   }
@@ -105,6 +137,15 @@ const VisualizarLista: React.FC = () => {
                   onClick={handlePrint}
                 >
                   Imprimir lista
+                </Button>
+                <Button
+                  size="medium"
+                  variant="contained"
+                  color="primary"
+                  className={classes.root}
+                  onClick={() => envioEmail()}
+                >
+                  Enviar lista
                 </Button>
                 <Button
                   size="medium"
