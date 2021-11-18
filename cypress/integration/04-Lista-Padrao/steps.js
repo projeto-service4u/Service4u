@@ -38,20 +38,20 @@ When(/^clico no botão Adicionar nova lista$/, () => {
 When(
   /^após preencher os dados de Nome da lista, Produto, Quantidade,  Unidade-Medida$/,
   () => {
-    cy.get('.sc-bBXrwG > .input-group > .form-control').type(
+    cy.get('.sc-iwyWTf > .input-group > .form-control').type(
       'Nova Lista Padrão'
     )
     cy.get('.mySelect__value-container.css-319lph-ValueContainer').type(
-      'Tinta Branca{enter}'
+      'Tinta Fosca Branca{enter}'
     )
-    cy.get('.sc-lmoMya > :nth-child(2) > .input-group > .form-control').type(
+    cy.get('.sc-iJuVqt > :nth-child(2) > .input-group > .form-control').type(
       '5'
     )
     cy.get('.btn').click()
     cy.get('.mySelect__value-container.css-319lph-ValueContainer').type(
-      'Tinta Azul Brilhosa{enter}'
+      'Tinta Vermelha{enter}'
     )
-    cy.get('.sc-lmoMya > :nth-child(2) > .input-group > .form-control')
+    cy.get('.sc-iJuVqt > :nth-child(2) > .input-group > .form-control')
       .clear()
       .type('2')
   }
@@ -80,7 +80,7 @@ Then(/^clico no botão Visualizar na coluna Ações de determinado lista$/, () =
 Then(
   /^devo visualizar o título Lista Padrão, os botões Imprimir lista e Voltar$/,
   () => {
-    cy.get('.sc-jJEKmz').last().should('contain', 'Lista Padrão')
+    cy.get('.sc-hiSbEG').last().should('contain', 'Nova Lista Padrão')
     cy.get('.makeStyles-root-18').last().should('contain', 'Imprimir lista')
     cy.get('.makeStyles-voltar-19').last().should('contain', 'Voltar')
   }
@@ -95,16 +95,16 @@ Then(/^as colunas Nome, Quantidade, Unidade-Medida$/, () => {
 Then(/^as informações de itens pertencentes à lista$/, () => {
   cy.get('tbody > :nth-child(1) > :nth-child(1)').should(
     'contain',
-    'Tinta Branca'
+    'Tinta Fosca Branca'
   )
   cy.get('tbody > :nth-child(1) > :nth-child(2)').should('contain', '5')
-  cy.get('tbody > :nth-child(1) > :nth-child(3)').should('contain', '5 Litros')
+  cy.get('tbody > :nth-child(1) > :nth-child(3)').should('contain', 'Litros')
   cy.get('tbody > :nth-child(2) > :nth-child(1)').should(
     'contain',
-    'Tinta Azul Brilhosa'
+    'Tinta Vermelha'
   )
   cy.get('tbody > :nth-child(2) > :nth-child(2)').should('contain', '2')
-  cy.get('tbody > :nth-child(2) > :nth-child(3)').should('contain', '10 Litros')
+  cy.get('tbody > :nth-child(2) > :nth-child(3)').should('contain', 'Litros')
 })
 
 Then(
@@ -130,5 +130,9 @@ Then(/^clico no botão Excluir na coluna Ações de determinado lista$/, () => {
 })
 
 Then(/^a Lista Padrão em questão deve ser removida da lista$/, () => {
+  cy.get('.Toastify__toast-body').should(
+    'contain',
+    'Lista deletada com sucesso!'
+  )
   cy.contains('Nova Lista Padrão').should('not.exist')
 })

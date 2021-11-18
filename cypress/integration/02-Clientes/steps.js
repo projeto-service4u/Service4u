@@ -91,6 +91,10 @@ Then(
 )
 
 Then(/^o cliente em questão deve ser excluído e removido da listagem$/, () => {
+  cy.get('.Toastify__toast-body').should(
+    'contain',
+    'Cliente deletado com sucesso!'
+  )
   cy.contains('matheus@teste.com').should('not.exist')
 })
 Then(
@@ -151,7 +155,7 @@ Then(/^clico no botão Nova Lista$/, () => {
 Then(
   /^devo visualizar o título Nova Lista Padrão, os botões Salvar Lista, Voltar e Adicionar$/,
   () => {
-    cy.get('.sc-iwyWTf').should('contain', 'Nova Lista Padrão')
+    cy.get('.sc-cxFLGX').should('contain', 'Nova Lista Padrão')
     cy.get(
       '.MuiButtonBase-root.MuiButton-root.MuiButton-contained.makeStyles-root-19.MuiButton-containedPrimary.Mui-disabled.Mui-disabled'
     )
@@ -164,7 +168,7 @@ Then(
 
 And(/^os dados de Produto, Quantidade, Unidade - Medida$/, () => {
   cy.get('.mySelect__control').should('be.visible').contains('Select...')
-  cy.get('.sc-lmoMya > :nth-child(2) > .input-group > .input-group-text')
+  cy.get('.sc-iJuVqt > :nth-child(2) > .input-group > .input-group-text')
     .should('be.visible')
     .contains('Quantidade')
   cy.get(':nth-child(3) > .input-group > .input-group-text')
@@ -183,20 +187,20 @@ And(
 And(
   /^devo preencher o Nome da Lista, selecionar Produto, Quantidade e Unidade-Medida$/,
   () => {
-    cy.get('.sc-bBXrwG > .input-group > .form-control').type(
+    cy.get('.sc-iwyWTf > .input-group > .form-control').type(
       'Lista Padrão Matheus'
     )
     cy.get('.mySelect__value-container.css-319lph-ValueContainer').type(
-      'Tinta Branca{enter}'
+      'Tinta Fosca Branca{enter}'
     )
-    cy.get('.sc-lmoMya > :nth-child(2) > .input-group > .form-control').type(
+    cy.get('.sc-iJuVqt > :nth-child(2) > .input-group > .form-control').type(
       '5'
     )
     cy.get('.btn').click()
     cy.get('.mySelect__value-container.css-319lph-ValueContainer').type(
-      'Tinta Azul Brilhosa{enter}'
+      'Tinta Vermelha{enter}'
     )
-    cy.get('.sc-lmoMya > :nth-child(2) > .input-group > .form-control')
+    cy.get('.sc-iJuVqt > :nth-child(2) > .input-group > .form-control')
       .clear()
       .type('2')
     cy.get('.btn').click()
@@ -228,6 +232,10 @@ Then(
   /^ao clicar no botão Excluir em uma das listas existentes a mesma deve deixar de ser exibida$/,
   () => {
     cy.get('.btn-danger').click()
+    cy.get('.Toastify__toast-body').should(
+      'contain',
+      'Lista deletada com sucesso!'
+    )
     cy.get('tbody >:nth-child(1)').should('not.exist')
   }
 )
