@@ -25,6 +25,7 @@ const VisualizarLista: React.FC = () => {
   const [lista, setLista] = useState<ListaPadrao>({} as ListaPadrao)
   const [loading, setLoading] = useState(true)
   const history = useHistory()
+  const teste = process.env.SERVICE_ID
 
   const listaPadrao = []
 
@@ -36,13 +37,11 @@ const VisualizarLista: React.FC = () => {
       await database
         .ref(`clientes/${clienteUid}/listaServicos/${listaId}`)
         .once('value')
-
         .then(snapshot => {
           if (snapshot.exists()) {
             snapshot
             const key = snapshot.key
             const data = snapshot.val()
-
             setLista(data)
           } else {
             console.log('No data available')
@@ -80,15 +79,15 @@ const VisualizarLista: React.FC = () => {
   }, [])
 
   const envioEmail = () => {
-    console.log('enviar lista')
-
+    console.log('Enviando email', lista.nome)
     emailjs
       .send(
-        '',
-        '',
+        process.env.REACT_APP_SERVICE_ID,
+        process.env.REACT_APP_TEMPLATE_ID,
         {
           email_cliente: '',
           nome_user: '',
+          nome_lista: lista.nome,
           message: lista.produtos
             .map(
               produto =>
@@ -98,7 +97,7 @@ const VisualizarLista: React.FC = () => {
               '&nbsp;&nbsp;&nbsp;          |              &nbsp;&nbsp;&nbsp;'
             )
         },
-        ''
+        process.env.REACT_APP_USER_ID
       )
       .then(
         function (response) {
@@ -138,6 +137,7 @@ const VisualizarLista: React.FC = () => {
                 >
                   Imprimir lista
                 </Button>
+                {'  '}
                 <Button
                   size="medium"
                   variant="contained"
@@ -146,7 +146,7 @@ const VisualizarLista: React.FC = () => {
                   onClick={() => envioEmail()}
                 >
                   Enviar lista
-                </Button>
+                </Button>{' '}
                 <Button
                   size="medium"
                   variant="contained"
