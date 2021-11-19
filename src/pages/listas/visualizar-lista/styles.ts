@@ -23,8 +23,9 @@ export const ContainerAcoes = styled.div`
 
 export const BotaoAdicionar = styled.div`
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  width: 22%;
+  width: 27%;
 `
 
 export const Titulo = styled.div`
@@ -34,8 +35,10 @@ export const Titulo = styled.div`
 
 export const useStyles = makeStyles({
   root: {
-    minWidth: '12vw',
-    height: '3vh',
+    display: 'flex',
+    justifyContent: 'center',
+
+    minHeight: '3vh',
     fontSize: '12px',
     backgroundColor: `${Cores.SECUNDARIA_2_ESCURO}`,
     color: `${Cores.PRIMARIA_1_ESCURO}`,
@@ -45,9 +48,10 @@ export const useStyles = makeStyles({
     }
   },
   voltar: {
-    width: '8vw',
-    minWidth: '8vw',
-    height: '3vh',
+    display: 'flex',
+    justifyContent: 'space-between',
+
+    minHeight: '3vh',
     fontSize: '12px',
     backgroundColor: `${Cores.PRIMARIA_1}`,
     color: `${Cores.BRANCO}`,
