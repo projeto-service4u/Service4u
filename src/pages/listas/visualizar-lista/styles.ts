@@ -33,6 +33,10 @@ export const Titulo = styled.div`
   font: 600 20px 'Poppins', sans-serif;
 `
 
+export const DivProdutos = styled.div`
+  width: 30%;
+`
+
 export const useStyles = makeStyles({
   root: {
     display: 'flex',
