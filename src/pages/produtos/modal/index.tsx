@@ -44,6 +44,7 @@ export const ModalProdutos: React.FC<any> = (props, ...rest) => {
           produtoAlterado(true)
           toast.success('Produto editado com sucesso!')
         } catch (error) {
+          console.log(error)
           toast.error('Erro ao editar Produto!')
         }
       } else {

@@ -56,6 +56,7 @@ const Tabela: React.FC<PropsTable> = (props, ...rest) => {
   }, [props.dados])
 
   const produtoAlterado = alterado => {
+    console.log('Produto alterado', alterado)
     props.alterado(alterado)
   }
 

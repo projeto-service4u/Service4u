@@ -23,6 +23,8 @@ const Produtos: React.FC = () => {
   const [modalShow, setModalShow] = useState(false)
   const [produtos, setProdutos] = useState<ListaProdutos[]>([])
   const [loading, setLoading] = useState(true)
+  const [alteradoProduto, setAlterado] = useState(false)
+
   const produtosLista = []
 
   const getDadosFirebase = () => {
@@ -58,6 +60,16 @@ const Produtos: React.FC = () => {
 
     // return () => getDadosFirebase()
   }, [])
+
+  const produtoAlterado = alterado => {
+    setAlterado(alterado)
+
+    if (alteradoProduto) {
+      novoProduto()
+    }
+
+    console.log(alterado)
+  }
 
   const novoProduto = () => {
     database.ref('produtos').on('child_added', data => {
@@ -98,6 +110,7 @@ const Produtos: React.FC = () => {
             dados={produtos}
             cabecalho={['Nome', 'Unidade - Medida', 'Ações']}
             acoes={true}
+            alterado={produtoAlterado}
           />
         )}
       </P.Container>
