@@ -42,11 +42,13 @@ Then(/^devo visualizar o modal com o título "([^"]*)"$/, () => {
 
 And(/^os campos Nome "([^"]*)" e "([^"]*)"$/, () => {
   cy.get('.row > :nth-child(1)').should('be.visible').contains('Nome Produto')
-  cy.get('.row > :nth-child(2)').should('be.visible').contains('Unidade/Medida')
+  cy.get('.row > :nth-child(2)')
+    .should('be.visible')
+    .contains('Unidade - Medida')
 })
 
 And(/^os botões de Enviar e Fechar$/, () => {
-  cy.get('.col-lg-2').should('be.visible').contains('Enviar')
+  cy.get('.col-lg-2').should('be.visible').contains('Salvar')
   cy.get('.modal-footer > .btn').should('be.visible').contains('Fechar')
 })
 

@@ -81,7 +81,9 @@ Then(
   /^devo visualizar o título Lista Padrão, os botões Imprimir lista e Voltar$/,
   () => {
     cy.get('.sc-hiSbEG').last().should('contain', 'Nova Lista Padrão')
-    cy.get('.makeStyles-root-18').last().should('contain', 'Imprimir lista')
+    cy.get('.input-group-text').should('contain', 'Email Cliente')
+    cy.get('.sc-jJEKmz > :nth-child(1)').should('contain', 'Imprimir lista')
+    cy.get('.sc-jJEKmz > :nth-child(2)').should('contain', 'Enviar lista')
     cy.get('.makeStyles-voltar-19').last().should('contain', 'Voltar')
   }
 )
@@ -115,7 +117,7 @@ Then(
         cy.stub(win, 'print')
         cy.get('[href="/lista-padrao"]').click()
         cy.get(':nth-child(2) > .btn-primary').last().click()
-        cy.get('.makeStyles-root-18')
+        cy.get('.sc-jJEKmz > :nth-child(1)')
           .click()
           .then(() => {
             expect(win.print).to.be.called
