@@ -108,8 +108,8 @@ Then(
   /^devo visualizar o título Cliente, os botões Nova lista e Voltar$/,
   () => {
     cy.get('.sc-bqyKOL').should('contain', 'Cliente')
-    cy.get('.makeStyles-root-14').should('be.visible').contains('Nova Lista')
-    cy.get('.makeStyles-voltar-15').should('be.visible').contains('Voltar')
+    cy.get('.jss14').should('be.visible').contains('Nova Lista')
+    cy.get('.jss15').should('be.visible').contains('Voltar')
   }
 )
 
@@ -149,19 +149,15 @@ And(
   }
 )
 Then(/^clico no botão Nova Lista$/, () => {
-  cy.get('.makeStyles-root-14').click()
+  cy.get('.jss14').click()
 })
 
 Then(
   /^devo visualizar o título Nova Lista Padrão, os botões Salvar Lista, Voltar e Adicionar$/,
   () => {
     cy.get('.sc-cxFLGX').should('contain', 'Nova Lista Padrão')
-    cy.get(
-      '.MuiButtonBase-root.MuiButton-root.MuiButton-contained.makeStyles-root-19.MuiButton-containedPrimary.Mui-disabled.Mui-disabled'
-    )
-      .should('be.disabled')
-      .contains('Salvar lista')
-    cy.get('.makeStyles-voltar-20').should('be.visible').contains('Voltar')
+    cy.get('.jss19').should('be.disabled').contains('Salvar lista')
+    cy.get('.jss20').should('be.visible').contains('Voltar')
     cy.get('.btn').should('contain', 'Adicionar')
   }
 )
@@ -190,14 +186,14 @@ And(
     cy.get('.sc-iwyWTf > .input-group > .form-control').type(
       'Lista Padrão Matheus'
     )
-    cy.get('.mySelect__value-container.css-319lph-ValueContainer').type(
+    cy.get('.mySelect__input-container.css-ackcql').type(
       'Tinta Fosca Branca{enter}'
     )
     cy.get('.sc-iJuVqt > :nth-child(2) > .input-group > .form-control').type(
       '5'
     )
     cy.get('.btn').click()
-    cy.get('.mySelect__value-container.css-319lph-ValueContainer').type(
+    cy.get('.mySelect__input-container.css-ackcql').type(
       'Tinta Vermelha{enter}'
     )
     cy.get('.sc-iJuVqt > :nth-child(2) > .input-group > .form-control')
@@ -210,12 +206,12 @@ And(
 Then(
   /^após clicar em Salvar Lista a mesma deve ser criada com sucesso$/,
   () => {
-    cy.get('.makeStyles-root-19').click()
+    cy.get('.jss19').click()
     cy.get('.Toastify__toast-body').should(
       'contain',
       'Lista criada com sucesso!'
     )
-    cy.get('.makeStyles-voltar-20').click()
+    cy.get('.jss20').click()
   }
 )
 

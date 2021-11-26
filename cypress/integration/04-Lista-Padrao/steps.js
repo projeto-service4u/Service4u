@@ -41,14 +41,13 @@ When(
     cy.get('.sc-iwyWTf > .input-group > .form-control').type(
       'Nova Lista Padrão'
     )
-    cy.get('.mySelect__value-container.css-319lph-ValueContainer').type(
-      'Tinta Fosca Branca{enter}'
-    )
+    cy.wait(2000)
+    cy.get('.mySelect__input-container.css-ackcql').type('Tinta Amarela{enter}')
     cy.get('.sc-iJuVqt > :nth-child(2) > .input-group > .form-control').type(
       '5'
     )
     cy.get('.btn').click()
-    cy.get('.mySelect__value-container.css-319lph-ValueContainer').type(
+    cy.get('.mySelect__input-container.css-ackcql').type(
       'Tinta Vermelha{enter}'
     )
     cy.get('.sc-iJuVqt > :nth-child(2) > .input-group > .form-control')
@@ -61,7 +60,7 @@ Then(
   /^ao clicar nos botões Adicionar e Enviar, devo receber uma mensagem de sucesso$/,
   () => {
     cy.get('.btn').click()
-    cy.get('.makeStyles-root-18').click()
+    cy.get('.jss18').click()
     cy.get('.Toastify__toast-body').should(
       'contain',
       'Lista adicionada com sucesso'
@@ -70,7 +69,7 @@ Then(
 )
 
 Then(/^visualizar a lista na listagem após fechar o modal$/, () => {
-  cy.get('.makeStyles-voltar-19').click()
+  cy.get('.jss19').click()
   cy.get('tbody >> :nth-child(1)').last().should('contain', 'Lista Padrão')
 })
 Then(/^clico no botão Visualizar na coluna Ações de determinado lista$/, () => {
@@ -84,7 +83,7 @@ Then(
     cy.get('.input-group-text').should('contain', 'Email Cliente')
     cy.get('.sc-jJEKmz > :nth-child(1)').should('contain', 'Imprimir lista')
     cy.get('.sc-jJEKmz > :nth-child(2)').should('contain', 'Enviar lista')
-    cy.get('.makeStyles-voltar-19').last().should('contain', 'Voltar')
+    cy.get('.jss19').last().should('contain', 'Voltar')
   }
 )
 
@@ -97,7 +96,7 @@ Then(/^as colunas Nome, Quantidade, Unidade-Medida$/, () => {
 Then(/^as informações de itens pertencentes à lista$/, () => {
   cy.get('tbody > :nth-child(1) > :nth-child(1)').should(
     'contain',
-    'Tinta Fosca Branca'
+    'Tinta Amarela'
   )
   cy.get('tbody > :nth-child(1) > :nth-child(2)').should('contain', '5')
   cy.get('tbody > :nth-child(1) > :nth-child(3)').should('contain', 'Litros')
