@@ -42,13 +42,15 @@ When(
       'Nova Lista Padrão'
     )
     cy.wait(2000)
-    cy.get('.mySelect__input-container.css-ackcql').type('Tinta Amarela{enter}')
+    cy.get('.mySelect__input-container.css-ackcql').type(
+      'Tinta Amarela{enter}, { force: true }'
+    )
     cy.get('.sc-iJuVqt > :nth-child(2) > .input-group > .form-control').type(
       '5'
     )
     cy.get('.btn').click()
     cy.get('.mySelect__input-container.css-ackcql').type(
-      'Tinta Vermelha{enter}'
+      'Tinta Vermelha{enter}, { force: true }'
     )
     cy.get('.sc-iJuVqt > :nth-child(2) > .input-group > .form-control')
       .clear()

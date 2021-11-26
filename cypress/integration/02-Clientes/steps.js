@@ -187,14 +187,14 @@ And(
       'Lista Padrão Matheus'
     )
     cy.get('.mySelect__input-container.css-ackcql').type(
-      'Tinta Fosca Branca{enter}'
+      'Tinta Fosca Branca{enter}, { force: true }'
     )
     cy.get('.sc-iJuVqt > :nth-child(2) > .input-group > .form-control').type(
       '5'
     )
     cy.get('.btn').click()
     cy.get('.mySelect__input-container.css-ackcql').type(
-      'Tinta Vermelha{enter}'
+      'Tinta Vermelha{enter}, { force: true }'
     )
     cy.get('.sc-iJuVqt > :nth-child(2) > .input-group > .form-control')
       .clear()
