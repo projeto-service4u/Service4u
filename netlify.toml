@@ -1,0 +1,7 @@
+# run Cypress E2E tests
+[[plugins]]
+package = "netlify-plugin-cypress"
+  # run Cypress tests after deploy and record test results
+  # to Cypress Dashboard
+  [plugins.inputs]
+    record = true

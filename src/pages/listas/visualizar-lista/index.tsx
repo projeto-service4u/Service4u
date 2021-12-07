@@ -1,10 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { FormControl, InputGroup } from 'react-bootstrap'
 import PrintProvider, { Print, NoPrint } from 'react-easy-print'
 import { useHistory } from 'react-router'
 import { useParams } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify'
 
 import { Button, makeStyles } from '@material-ui/core'
 import Skeleton from '@material-ui/lab/Skeleton'
+import emailjs from 'emailjs-com'
 
 import { database, firebase } from '../../../services/firebase'
 import { ListaPadrao } from '../nova-lista-padrao/tipos'
@@ -24,6 +27,9 @@ const VisualizarLista: React.FC = () => {
   const [lista, setLista] = useState<ListaPadrao>({} as ListaPadrao)
   const [loading, setLoading] = useState(true)
   const history = useHistory()
+  const [emailCliente, setEmailCliente] = useState('')
+  const [renderizaInput, setRenderizaInput] = useState(true)
+  const teste = process.env.SERVICE_ID
 
   const listaPadrao = []
 
@@ -31,17 +37,29 @@ const VisualizarLista: React.FC = () => {
   const clienteUid = params.uidCliente
 
   const getDadosFirebase = async () => {
+    console.log(
+      '🚀 ~ file: index.tsx ~ line 40 ~ getDadosFirebase ~ clienteUid',
+      clienteUid
+    )
     if (clienteUid) {
+      setRenderizaInput(false)
+      database
+        .ref(`clientes/${clienteUid}`)
+        .once('value')
+        .then(snapshot => {
+          setEmailCliente(snapshot.val().clienteEmail)
+        })
+        .catch(error => {
+          console.error(error)
+        })
       await database
         .ref(`clientes/${clienteUid}/listaServicos/${listaId}`)
         .once('value')
-
         .then(snapshot => {
           if (snapshot.exists()) {
             snapshot
             const key = snapshot.key
             const data = snapshot.val()
-
             setLista(data)
           } else {
             console.log('No data available')
@@ -78,6 +96,40 @@ const VisualizarLista: React.FC = () => {
     getDadosFirebase()
   }, [])
 
+  const envioEmail = () => {
+    console.log('Enviando email', lista.nome)
+    console.log('Email', emailCliente)
+    emailjs
+      .send(
+        process.env.REACT_APP_EMAIL_SERVICE_ID,
+        process.env.REACT_APP_EMAIL_TEMPLATE_ID,
+        {
+          email_cliente: emailCliente,
+          nome_user: '',
+          nome_lista: lista.nome,
+          message: lista.produtos
+            .map(
+              produto =>
+                `${produto.nome}  - ${produto.quantidade} - ${produto.medida} `
+            )
+            .join(
+              '&nbsp;&nbsp;&nbsp;          |              &nbsp;&nbsp;&nbsp;'
+            )
+        },
+        process.env.REACT_APP_EMAIL_USER_ID
+      )
+      .then(
+        function (response) {
+          console.log('SUCCESS!', response.status, response.text)
+          toast.success('Email enviado com sucesso!')
+        },
+        function (error) {
+          console.log('FAILED...', error)
+          toast.error('Erro ao enviar Email!')
+        }
+      )
+  }
+
   const handlePrint = () => {
     window.print()
   }
@@ -90,11 +142,23 @@ const VisualizarLista: React.FC = () => {
     <PrintProvider>
       <NoPrint>
         <App>
+          <ToastContainer />
           <P.Container>
             <P.ContainerAcoes>
               <Print name="titulo">
                 <P.Titulo>{lista?.nome}</P.Titulo>
               </Print>
+              {renderizaInput && (
+                <P.DivProdutos>
+                  <InputGroup size="lg">
+                    <InputGroup.Text>Email Cliente</InputGroup.Text>
+                    <FormControl
+                      aria-label="Email"
+                      onChange={event => setEmailCliente(event.target.value)}
+                    />
+                  </InputGroup>
+                </P.DivProdutos>
+              )}
 
               <P.BotaoAdicionar>
                 <Button
@@ -106,6 +170,16 @@ const VisualizarLista: React.FC = () => {
                 >
                   Imprimir lista
                 </Button>
+                {'  '}
+                <Button
+                  size="medium"
+                  variant="contained"
+                  color="primary"
+                  className={classes.root}
+                  onClick={() => envioEmail()}
+                >
+                  Enviar lista
+                </Button>{' '}
                 <Button
                   size="medium"
                   variant="contained"
@@ -127,6 +201,7 @@ const VisualizarLista: React.FC = () => {
                 <Tabela
                   dados={lista?.produtos}
                   cabecalho={['Nome', 'Quantidade', 'Unidade - Medida']}
+                  acoes={false}
                 />
               </Print>
             )}

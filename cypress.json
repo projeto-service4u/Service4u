@@ -1,7 +1,6 @@
 {
   "testFiles": "**/*.feature",
-  "baseUrl": "http://localhost:3000/",
+  "baseUrl": "https://devs4u.netlify.app/",
   "video": false,
-  "projectId": "tg4q3u",
-  "screenshotOnRunFailure": false
+  "projectId": "tg4q3u"
 }

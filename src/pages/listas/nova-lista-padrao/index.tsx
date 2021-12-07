@@ -187,7 +187,7 @@ const NovaListaPadrao: React.FC = () => {
           <P.Titulo>Nova Lista Padrão</P.Titulo>
           <P.NomeLista>
             <InputGroup size="lg">
-              <InputGroup.Text>Nome da listaaaaaa</InputGroup.Text>
+              <InputGroup.Text>Nome da lista</InputGroup.Text>
               <FormControl
                 aria-label="First name"
                 onChange={event => setTitle(event.target.value)}
@@ -257,6 +257,7 @@ const NovaListaPadrao: React.FC = () => {
           <Tabela
             dados={produtoLista}
             cabecalho={['Nome', 'Quantidade', 'Unidade - Medida']}
+            acoes={false}
           />
         </P.ContainerTabela>
       </P.Container>

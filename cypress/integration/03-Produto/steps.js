@@ -42,11 +42,13 @@ Then(/^devo visualizar o modal com o título "([^"]*)"$/, () => {
 
 And(/^os campos Nome "([^"]*)" e "([^"]*)"$/, () => {
   cy.get('.row > :nth-child(1)').should('be.visible').contains('Nome Produto')
-  cy.get('.row > :nth-child(2)').should('be.visible').contains('Unidade/Medida')
+  cy.get('.row > :nth-child(2)')
+    .should('be.visible')
+    .contains('Unidade - Medida')
 })
 
 And(/^os botões de Enviar e Fechar$/, () => {
-  cy.get('.col-lg-2').should('be.visible').contains('Enviar')
+  cy.get('.col-lg-2').should('be.visible').contains('Salvar')
   cy.get('.modal-footer > .btn').should('be.visible').contains('Fechar')
 })
 
@@ -66,7 +68,7 @@ Then(
   () => {
     cy.get(':nth-child(1) > .form-control').type('Tinta Fosca Preta')
     cy.get(':nth-child(2) > .form-control').type('10 Litros')
-    cy.get('.btn.btn-primary.btn-lg').click()
+    cy.get('.col-lg-2 > .btn').click()
     cy.get('.Toastify__toast-body').should(
       'contain',
       'Produto adicionado com sucesso'
@@ -79,3 +81,18 @@ And(/^visualizar na listagem após fechar o modal$/, () => {
   cy.get('.MuiPaper-root').should('contain', 'Tinta Fosca Preta')
   cy.get('.MuiPaper-root').should('contain', '10 Litros')
 })
+
+Then(/^clico no botão Excluir de determinado produto$/, () => {
+  cy.get(':nth-child(3) > .btn-danger').last().click()
+})
+
+Then(
+  /^devo receber a mensagem de confirmação e o mesmo removido da listagem$/,
+  () => {
+    cy.get('.Toastify__toast-body').should(
+      'contain',
+      'Produto deletado com sucesso!'
+    )
+    cy.contains('Tinta Fosca Preta').should('not.exist')
+  }
+)

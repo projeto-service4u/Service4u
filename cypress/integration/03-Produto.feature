@@ -38,3 +38,9 @@ Scenario: Cadastro de produto com sucesso
     And clico no botão Adicionar item
     Then após preencher os dados de "Nome" e "Unidade/Medida" e clicar em Enviar devo receber uma mensagem de sucesso
     And visualizar na listagem após fechar o modal
+
+Scenario: Exclusão de produto com sucesso
+    Given que sou um prestador cadastrado
+    When acesso a tela de Produtos
+    And clico no botão Excluir de determinado produto
+    Then devo receber a mensagem de confirmação e o mesmo removido da listagem

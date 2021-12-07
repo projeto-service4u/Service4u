@@ -8,7 +8,7 @@ When(/^acesso o site$/, () => {
 
 Then(/^devo visualizar o logo Service4U$/, () => {
   cy.get('.container-logo').should('be.visible').contains('Service 4U')
-  cy.get('img').should('have.attr', 'src', '/static/media/s4uLogo.1ced3573.svg')
+  cy.get('img').should('have.attr', 'src', '/static/media/s4uLogo.1ec7dc43.svg')
 })
 
 Then(/^visualizar os campos "([^"]*)" e "([^"]*)"$/, (email, senha) => {

@@ -1,7 +1,7 @@
 import React, { FormEvent, useEffect, useState } from 'react'
-import { Button, Form, Modal, Row, Col } from 'react-bootstrap'
+import { Button, Col, Form, Modal, Row } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
 
 import { useFormik } from 'formik'
 
@@ -9,7 +9,7 @@ import { database, firebase } from '../../../services/firebase'
 import { formProdutoSchema } from './schema'
 import { Container } from './styles'
 
-export const ModalProdutos: React.FC<any> = props => {
+export const ModalProdutos: React.FC<any> = (props, ...rest) => {
   const initialValues = {
     produto: '',
     medida: ''
@@ -24,22 +24,47 @@ export const ModalProdutos: React.FC<any> = props => {
     })
   }, [])
 
+  useEffect(() => {
+    formik.setValues({
+      produto: props.dadosProduto?.nome,
+      medida: props.dadosProduto?.medida
+    })
+  }, [props.dadosProduto])
+
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: formProdutoSchema,
     onSubmit: (values, { resetForm }) => {
-      const produtosRef = database.ref('/produtos')
-      produtosRef.push({
-        produtoNome: values.produto,
-        produtoMedida: values.medida
-      })
-      toast.success('Produto adicionado com sucesso', {
-        icon: '🚀',
-        theme: 'colored'
-      })
-      resetForm()
+      if (props.editar) {
+        try {
+          database.ref(`produtos/${props.dadosProduto.uid}`).update({
+            produtoNome: values.produto,
+            produtoMedida: values.medida
+          })
+          produtoAlterado(true)
+          toast.success('Produto editado com sucesso!')
+        } catch (error) {
+          console.log(error)
+          toast.error('Erro ao editar Produto!')
+        }
+      } else {
+        const produtosRef = database.ref('/produtos')
+        produtosRef.push({
+          produtoNome: values.produto,
+          produtoMedida: values.medida
+        })
+        toast.success('Produto adicionado com sucesso', {
+          icon: '🚀',
+          theme: 'colored'
+        })
+        resetForm()
+      }
     }
   })
+
+  const produtoAlterado = alterado => {
+    props.alterado(alterado)
+  }
 
   return (
     <Modal
@@ -70,10 +95,10 @@ export const ModalProdutos: React.FC<any> = props => {
                   />
                 </Col>
                 <Col>
-                  <Form.Label>Unidade/Medida</Form.Label>
+                  <Form.Label>Unidade - Medida</Form.Label>
                   <Form.Control
                     size="lg"
-                    placeholder="ex: Kg / Unidade / Litros"
+                    placeholder="ex: Kg - Unidade - Litros"
                     name="medida"
                     onChange={formik.handleChange}
                     value={formik.values.medida}
@@ -89,7 +114,7 @@ export const ModalProdutos: React.FC<any> = props => {
                     type="submit"
                     disabled={!(formik.isValid && formik.dirty)}
                   >
-                    Enviar
+                    Salvar
                   </Button>
                 </Col>
               </Row>

@@ -6,8 +6,9 @@ import { ToastContainer, toast } from 'react-toastify'
 import Paper from '@material-ui/core/Paper'
 import { makeStyles } from '@material-ui/core/styles'
 
+import { ModalProdutos } from '../../pages/produtos/modal/index'
+import { ListaProdutos } from '../../pages/produtos/tipos'
 import { database, firebase } from '../../services/firebase'
-import { ListaProdutos } from './../../pages/produtos/tipos'
 import { Container } from './styles'
 import { Column, PropsTable } from './tipos'
 
@@ -20,7 +21,12 @@ const useStyles = makeStyles({
 })
 const Tabela: React.FC<PropsTable> = (props, ...rest) => {
   const classes = useStyles()
+  const [modalShow, setModalShow] = useState(false)
+
   const [produtos, setProdutos] = useState<ListaProdutos[]>(props.dados)
+  const [editaprodutos, setEditaProdutos] = useState<ListaProdutos>(undefined)
+  const [editar, setEditar] = useState(false)
+  const [alterado, setAlterado] = useState(false)
 
   const deletarProduto = uid => {
     try {
@@ -28,16 +34,31 @@ const Tabela: React.FC<PropsTable> = (props, ...rest) => {
       setProdutos([
         ...produtos.filter(produtos => produtos.uid !== uid)
       ] as ListaProdutos[])
-      toast.success('Cliente deletado com sucesso!')
+      toast.success('Produto deletado com sucesso!')
     } catch (error) {
-      toast.error('Erro ao deletar cliente!')
+      toast.error('Erro ao deletar Produto!')
     }
     console.log(uid)
+  }
+
+  const editarProduto = (uid, nome, medida) => {
+    setEditaProdutos({
+      uid: uid,
+      nome: nome,
+      medida: medida
+    })
+    setEditar(true)
+    setModalShow(true)
   }
 
   useEffect(() => {
     setProdutos(props.dados)
   }, [props.dados])
+
+  const produtoAlterado = alterado => {
+    console.log('Produto alterado', alterado)
+    props.alterado(alterado)
+  }
 
   return (
     <Paper className={classes.root}>
@@ -63,19 +84,37 @@ const Tabela: React.FC<PropsTable> = (props, ...rest) => {
               <td key={id + 2}>{dados.nome}</td>
               {dados.quantidade && <td key={id + 3}>{dados.quantidade}</td>}
               <td key={id}>{dados.medida}</td>
-              <td key={id + 4}>
-                <Button
-                  variant="danger"
-                  size="lg"
-                  onClick={() => deletarProduto(dados.uid)}
-                >
-                  Excluir
-                </Button>
-              </td>
+              {props.acoes && (
+                <td key={id + 4}>
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    onClick={() =>
+                      editarProduto(dados.uid, dados.nome, dados.medida)
+                    }
+                  >
+                    Editar
+                  </Button>{' '}
+                  <Button
+                    variant="danger"
+                    size="lg"
+                    onClick={() => deletarProduto(dados.uid)}
+                  >
+                    Excluir
+                  </Button>
+                </td>
+              )}
             </tr>
           ))}
         </tbody>
       </Table>
+      <ModalProdutos
+        editar={editar}
+        dadosProduto={editaprodutos}
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        alterado={produtoAlterado}
+      />
     </Paper>
   )
 }
