@@ -19,6 +19,7 @@ const Produtos: React.FC = () => {
   const [loading, setLoading] = useState(true)
   const [alteradoProduto, setAlterado] = useState<boolean>()
 
+
   const produtosLista = []
 
   const getDadosFirebase = () => {
@@ -65,6 +66,7 @@ const Produtos: React.FC = () => {
 
     console.log(alterado)
   }
+
 
   const novoProduto = async () => {
     await database.ref('produtos').on('child_added', async data => {
