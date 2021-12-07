@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useLayoutEffect,
-  useCallback,
-  useMemo
-} from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Button, makeStyles } from '@material-ui/core'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
@@ -23,7 +17,7 @@ const Produtos: React.FC = () => {
   const [modalShow, setModalShow] = useState(false)
   const [produtos, setProdutos] = useState<ListaProdutos[]>([])
   const [loading, setLoading] = useState(true)
-  const [alteradoProduto, setAlterado] = useState(false)
+  const [alteradoProduto, setAlterado] = useState<boolean>()
 
   const produtosLista = []
 
@@ -61,24 +55,25 @@ const Produtos: React.FC = () => {
     // return () => getDadosFirebase()
   }, [])
 
-  const produtoAlterado = alterado => {
+  const produtoAlterado = async alterado => {
     setAlterado(alterado)
+    console.log('🚀 ~ file: index.tsx ~ line 60 ~ alterado', alterado)
 
-    if (alteradoProduto) {
-      novoProduto()
+    if (alterado) {
+      await novoProduto()
     }
 
     console.log(alterado)
   }
 
-  const novoProduto = () => {
-    database.ref('produtos').on('child_added', data => {
+  const novoProduto = async () => {
+    await database.ref('produtos').on('child_added', async data => {
       produtosLista.push({
         uid: data.key,
         medida: data.val().produtoMedida,
         nome: data.val().produtoNome
       })
-      setProdutos([...produtosLista])
+      setProdutos(produtos => [...produtosLista])
     })
   }
 
